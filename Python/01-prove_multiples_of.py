@@ -17,7 +17,10 @@ def multiples_of(number, length):
     integer greater than 0.  The implementation must be
     done using a list comprehension.
     """
-    pass
+    toreturn = []
+    for i in range(1,length+1):
+        toreturn.append(i*number)
+    return toreturn
 
 print(multiples_of(7, 5))    # [7, 14, 21, 28, 35]
 print(multiples_of(1.5, 10)) # [1.5, 3.0, 4.5, 6.0, 7.5, 9.0, 10.5, 12.0, 13.5, 15.0]
