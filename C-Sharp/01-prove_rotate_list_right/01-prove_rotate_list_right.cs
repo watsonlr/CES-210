@@ -22,29 +22,29 @@ Console.WriteLine("CSE212:  01-Prove - Problem 2");  // Comment out this line
 
     The resulting list should be returned
     Pseudo code  (3 examples)
-    print(rotate_list_right([1,2,3,4,5,6,7,8,9],1)) ==>
+    print(right_circular_rotate([1,2,3,4,5,6,7,8,9],1)) ==>
         should give ==> [9, 1, 2, 3, 4, 5, 6, 7, 8]
 
-    print(rotate_list_right([1,2,3,4,5,6,7,8,9],5)) ==>
+    print(right_circular_rotate([1,2,3,4,5,6,7,8,9],5)) ==>
         should give ==> [5, 6, 7, 8, 9, 1, 2, 3, 4]
 
-    print(rotate_list_right([1,2,3,4,5,6,7,8,9],9)) ==>
+    print(right_circular_rotate([1,2,3,4,5,6,7,8,9],9)) ==>
         should give ==> [1, 2, 3, 4, 5, 6, 7, 8, 9]
     */
-    int[] example_data = {1,2,3,4,5,6,7,8,9};
 
-    rotatable_class rotate_reg = new rotatable_class();
+    //rotatable_class rotate_reg = new rotatable_class();
 
-    // print(rotate_list_right([1,2,3,4,5,6,7,8,9],9)) ==>
-    //int[] rotate_1= rotate_reg.right_circular_rotate(example_data,1);
+    // int[] rotate_1= rotate_reg.right_circular_rotate(example_data,1);
     // int[] rotate_2 = rotate_reg.right_circular_rotate(example_data,5);
     // int[] rotate_3 = rotate_reg.right_circular_rotate(example_data,9);
 
-    List<int> rotate_list = new List<int>() { 1, 5, 9};
+    List<int> rotate_amounts = new List<int>() { 1, 5, 9};
 																
     Console.WriteLine("UNRotated:  ");
+    int[] example_data = {1,2,3,4,5,6,7,8,9};
     PrintArray(example_data);
-    foreach(int rotate_amount in rotate_list) {
+    foreach(int rotate_amount in rotate_amounts) {
+        rotatable_class rotate_reg = new rotatable_class();
         int[] rotated = rotate_reg.right_circular_rotate(example_data,rotate_amount);
         Console.WriteLine("------------");
         Console.WriteLine("Rotating:" + rotate_amount);
