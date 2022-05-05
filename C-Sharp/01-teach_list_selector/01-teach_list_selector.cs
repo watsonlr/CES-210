@@ -62,10 +62,12 @@ var l1 = new List<object> { 1, 2, 3, 4, 5 };
 var l2 = new List<object> { 2, 4, 6, 8, 10 };
 int[] selectints = { 1, 1, 1, 2, 2, 1, 2, 2, 2, 1 };
 List<object>  answer = list_selector(l1,l2,selectints);
-PrintList(answer);
+Console.Write("Number List Selected:    ");
+PrintList(answer);                           // Answer:  [1, 2, 3, 2, 4, 4, 6, 8, 10, 5]
 
 // Now characters 
 l1 = new List<object> { "A", "A", "A", "A", "A" };
 l2 = new List<object> { "B", "B", "B", "B", "B" };
 int[] selectchars = { 1, 2, 1, 2, 1, 2, 1, 2, 1, 2 };
-PrintList(list_selector(l1,l2,selectchars));
+Console.Write("Character List Selected: ");
+PrintList(list_selector(l1,l2,selectchars)); // Answer:   ['A', 'B', 'A', 'B', 'A', 'B', 'A', 'B', 'A', 'B', ]
