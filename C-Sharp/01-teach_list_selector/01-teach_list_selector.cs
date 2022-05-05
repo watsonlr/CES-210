@@ -46,7 +46,7 @@ List<object> list_selector(List<object> list1, List<object> list2, int[] selecto
 }
 // Print the List
 // ******************************** //
- void PrintList(List<int> toprint) {
+ void PrintList(List<object> toprint) {
 // ******************************** //
         Console.Write("[");
         for(int i=0;i<toprint.Count;i++)
@@ -60,11 +60,12 @@ List<object> list_selector(List<object> list1, List<object> list2, int[] selecto
 // Numbers first
 var l1 = new List<object> { 1, 2, 3, 4, 5 };
 var l2 = new List<object> { 2, 4, 6, 8, 10 };
-int[] select = { 1, 1, 1, 2, 2, 1, 2, 2, 2, 1 };
-PrintList(list_selector(l1,l2,select));
+int[] selectints = { 1, 1, 1, 2, 2, 1, 2, 2, 2, 1 };
+List<object>  answer = list_selector(l1,l2,selectints);
+PrintList(answer);
 
 // Now characters 
 l1 = new List<object> { "A", "A", "A", "A", "A" };
 l2 = new List<object> { "B", "B", "B", "B", "B" };
-int[] select = { 1, 2, 1, 2, 1, 2, 1, 2, 1, 2 };
-PrintList(list_selector(l1,l2,select));
+int[] selectchars = { 1, 2, 1, 2, 1, 2, 1, 2, 1, 2 };
+PrintList(list_selector(l1,l2,selectchars));
