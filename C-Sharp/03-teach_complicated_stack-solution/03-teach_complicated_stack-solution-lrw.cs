@@ -9,9 +9,11 @@ GitHub repository, unshared Google Drive folder) is acceptable.
 
 //--- Created from: dotnet new console. See https://aka.ms/new-console-template for more information ---//
 ********/
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
 Console.WriteLine("CSE212:  03-Teach - Problem 2 - Solution");  // Comment out this line
-
-
 bool check_braces(string line) {
 /* 
 This function will check a line of code an ensure that the braces (including parentheses,
@@ -22,15 +24,25 @@ brace is seen then the stack is checked to make sure there is a matching open br
 If an error is found, the function exits.
 */    
 // List<char> stack = new List<char>();  // a stack of characters
-char[] stack;
-char[] opening_delims = new char[] { '[',   '(',    '{' };  //set of what's opening
+string stack = "";
+// char[] opening_delims = new char[] { '[',   '(',    '{' };  //set of what's opening
+ArrayList opening_delims = new ArrayList() { '[',   '(',    '{' };  //set of what's opening
 char[] closing_delims = new char[] { ']',    ')',   '}' };
 
 foreach(char item in line) { // Look at each character in the line of code received
-    Console.WriteLine("ArrayExists:" + Array.Exists(opening_delims,element => item));
+    //Console.WriteLine("ArrayExists:" + Array.Exists(opening_delims,element => item));
+
+    if (opening_delims.Contains(item) ) { //push it if it's an opening
+        stack.Append(item);
+        }
+
+    if (closing_delims.Contains(item) ) { //check for closing 
+
+        }
 
     /*
     if (item in opening_delims ) opening_delims.a
+
     if (item == '(') or (item == '[') or (item == '{') {
         stack.Add(item); } // push on delimiters
 
