@@ -14,42 +14,79 @@ using System;
 
 Console.WriteLine("CSE212:  04-Prove - Problem 1");  // Comment out this line
 
-turnsQueue theTurnsQueue = new turnsQueue();
+turnsQueue theTurnsQueue  = new turnsQueue();
+
+// TESTING HERE
+theTurnsQueue.add_person("Bob", 2);
+theTurnsQueue.add_person("Tim", 3);
+theTurnsQueue.add_person("Sue", 1);
+theTurnsQueue.get_next_person();
+theTurnsQueue.get_next_person();
+theTurnsQueue.get_next_person();
+theTurnsQueue.get_next_person();
+theTurnsQueue.get_next_person();
+theTurnsQueue.get_next_person();
+theTurnsQueue.get_next_person();
+theTurnsQueue.add_person("Lynn", 2);
+theTurnsQueue.add_person("Sandy", 5);
+theTurnsQueue.add_person("Jeff", 3);
+theTurnsQueue.add_person("Doug", 1);
+theTurnsQueue.get_next_person();
+theTurnsQueue.get_next_person();
+theTurnsQueue.get_next_person();
+theTurnsQueue.get_next_person();
+theTurnsQueue.get_next_person();
+theTurnsQueue.get_next_person();
+theTurnsQueue.get_next_person();
+theTurnsQueue.get_next_person();
+theTurnsQueue.add_person("George", 3);
+theTurnsQueue.get_next_person();
+theTurnsQueue.add_person("Bob", 2);
+theTurnsQueue.add_person("Tim", 0);
+theTurnsQueue.add_person("Sue", 3);
+theTurnsQueue.get_next_person();
+theTurnsQueue.get_next_person();
+theTurnsQueue.get_next_person();
+theTurnsQueue.get_next_person();
+theTurnsQueue.get_next_person();
+// END OF TEST
+
 
 //     
 public class Queue {
     public List<Person> theQueue = new List<Person>();
-
     // 
-    //         Add an item to the queue
-    //         
     public void EnQueue(Person to_add) {
-    // var adding_node = new Node
-    // Console.WriteLine("Node_to_add priority:  " + node_to_add.priority);
-    // Console.WriteLine("Enqueueing:  " + node_to_add.ToString());
+        //         Add an item to the queue
+        // Console.WriteLine("Node_to_add priority:  " + node_to_add.priority);
+        // Console.WriteLine("Enqueueing:  " + node_to_add.ToString());
         theQueue.Add(to_add);
         }
-// 
-//         Remove the next item from the queue. 
-//         
-    public object dequeue() {
-        var value = this.queue[0];
-        this.queue.Remove(0);
-        return value;
-    }
-    // 
-    //         Check to see if the queue is empty.
-    //         
+
+    public Person DeQueue() {
+        Person toreturn = theQueue[0];
+        // Remove the next item from the queue. 
+        theQueue.RemoveAt(0);
+        return toreturn;
+        }
+
     public bool is_empty() {
         return (theQueue.Count == 0);
         }
-    // 
-    //         Support the len() function
-    //         
+
+    public printWholeQueue(){
+        foreach(int i=1;)
+        while (theQueue.Count()>0 ){
+    // Console.WriteLine("Items in Queue:" + thePriorityQueue.Count());
+    thePriorityQueue.DeQueue_with_priority().Show();
+
+
+        }
+
     public int Count() {
         return theQueue.Count;
+        }
     }
-}
 
 public class turnsQueue{
     // 
@@ -65,15 +102,25 @@ public class turnsQueue{
     public Queue theQueue = new Queue();
     // the variable and the methods implement circular with 'turns' rules
     // note that the enqueue and dequeue are just part of the Queue class itself, and not done here
-    
-
-
+    public void add_person(string name, int turns) {
+        Person newone = new Person(name, turns);
+        theQueue.EnQueue(newone);
     }
-
-
-
-
-
+    public Person get_next_person() {
+        /* Look at the end of the Queue and:
+           Deque the guy (end of the queue)
+           if this is his last turn (turns == 0), then do nothing
+           if it's not his last turn, then get the value, and just decrease his turns count
+           */
+        Person person_to_take_a_turn = theQueue.DeQueue();
+        if (person_to_take_a_turn.turns > 0) {
+            person_to_take_a_turn.turns--;
+            theQueue.EnQueue(person_to_take_a_turn);
+            }
+        person_to_take_a_turn.showMe();
+        return person_to_take_a_turn;
+        }
+    }
 
 
 public class Person {
@@ -86,7 +133,7 @@ public class Person {
         turns = turns_in;
     }
     public void showMe(){
-        Console.WriteLine("Name: "+ name + " Turns: " + turns);
+        Console.WriteLine("Name: "+ name + "\t\tTurns left: " + turns);
         }
     // 
     //             Support the display of single person.
@@ -96,62 +143,10 @@ public class Person {
 // 
 //         Add new people to the queue with a name and number of turns
 //         
-public virtual object add_person(object name, object turns) {
-    var person = Taking_Turns_Queue.Person(name, turns);
-    this.people.enqueue(person);
-}
-// 
 //         Get the next person in the queue and display them.  The person should
 //         go to the back of the queue again unless the turns variable shows that they 
 //         have no more turns left.  Note that a turns value of 0 or less means the 
 //         person has an infinite number of turns.  An error message is displayed 
 //         if the queue is empty.
 //         
-public virtual object get_next_person() {
-    if (this.people.is_empty()) {
-        Console.WriteLine("No one in the queue.");
-    } else {
-        var person = this.people.dequeue();
-        if (person.turns > 1) {
-            person.turns -= 1;
-            this.people.enqueue(person);
-        }
-        Console.WriteLine(person.name);
-    }
-}
-
 // 
-//         Support the len() function
-//         
-public virtual object @__len__() {
-    return this.people.Count;
-}
-
-// 
-//         Provide a string representation of everyone in the queue
-//         
-public override object ToString() {
-    return this.people.ToString();
-}
-
-public static object theTurnsQueue = Taking_Turns_Queue();
-
-testing() {
-    theTurnsQueue.add_person("Bob", 2);
-    theTurnsQueue.add_person("Tim", 5);
-    theTurnsQueue.add_person("Sue", 3);
-    theTurnsQueue.get_next_person();
-    theTurnsQueue.add_person("Bob", 2);
-    theTurnsQueue.add_person("Tim", 5);
-    theTurnsQueue.add_person("Sue", 3);
-    theTurnsQueue.get_next_person();
-    theTurnsQueue.add_person("George", 3);
-    theTurnsQueue.get_next_person();
-    theTurnsQueue.add_person("Bob", 2);
-    theTurnsQueue.add_person("Tim", 0);
-    theTurnsQueue.add_person("Sue", 3);
-    theTurnsQueue.get_next_person();
-    theTurnsQueue.get_next_person();
-}
-
-}
