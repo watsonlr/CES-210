@@ -14,7 +14,7 @@ using System;
 
 Console.WriteLine("CSE212:  04-Prove - Problem 1");  // Comment out this line
 
-Queue theTurnsQueue = new turnsQueue();
+turnsQueue theTurnsQueue = new turnsQueue();
 
 //     
 public class Queue {
@@ -51,7 +51,7 @@ public class Queue {
     }
 }
 
-public class turnsQueue(){
+public class turnsQueue{
     // 
     //     This queue is circular.  When people are added via add_person, then they are added to the 
     //     back of the queue (per FIFO rules).  When get_next_person is called, the next person
@@ -62,6 +62,10 @@ public class turnsQueue(){
     //     not be added back into the queue.
     //     
     // has specialized add/delete instruction that make this circular
+    public Queue theQueue = new Queue();
+    // the variable and the methods implement circular with 'turns' rules
+    // note that the enqueue and dequeue are just part of the Queue class itself, and not done here
+    
 
 
     }
