@@ -11,22 +11,30 @@ GitHub repository, unshared Google Drive folder) is acceptable.
 ********/
 using System.Collections.Generic;
 using System;
-
 Console.WriteLine("CSE212:  04-Prove - Problem 1");  // Comment out this line
+
 
 turnsQueue theTurnsQueue  = new turnsQueue();
 
-// TESTING HERE
-theTurnsQueue.add_person("Bob", 2);
-theTurnsQueue.add_person("Tim", 3);
+// TESTING HERE   -- can take out all the printing diagnostics sanity checks.
+theTurnsQueue.add_person("Bob", 2); theTurnsQueue.theQueue.printWholeQueue();
+theTurnsQueue.add_person("Tim", 3); theTurnsQueue.theQueue.printWholeQueue();
 theTurnsQueue.add_person("Sue", 1);
+theTurnsQueue.theQueue.printWholeQueue();
 theTurnsQueue.get_next_person();
+theTurnsQueue.theQueue.printWholeQueue();
 theTurnsQueue.get_next_person();
+theTurnsQueue.theQueue.printWholeQueue();
 theTurnsQueue.get_next_person();
+theTurnsQueue.theQueue.printWholeQueue();
 theTurnsQueue.get_next_person();
+theTurnsQueue.theQueue.printWholeQueue();
 theTurnsQueue.get_next_person();
+theTurnsQueue.theQueue.printWholeQueue();
 theTurnsQueue.get_next_person();
+theTurnsQueue.theQueue.printWholeQueue();
 theTurnsQueue.get_next_person();
+theTurnsQueue.theQueue.printWholeQueue();
 theTurnsQueue.add_person("Lynn", 2);
 theTurnsQueue.add_person("Sandy", 5);
 theTurnsQueue.add_person("Jeff", 3);
@@ -64,6 +72,11 @@ public class Queue {
         }
 
     public Person DeQueue() {
+        Person empty = new Person("Empty",-1);
+        if (theQueue.Count == 0) {
+            Console.WriteLine("Queue EMPTY");
+            return empty;
+            }
         Person toreturn = theQueue[0];
         // Remove the next item from the queue. 
         theQueue.RemoveAt(0);
@@ -74,11 +87,12 @@ public class Queue {
         return (theQueue.Count == 0);
         }
 
-    public printWholeQueue(){
-        foreach(int i=1;)
-        while (theQueue.Count()>0 ){
+    public void printWholeQueue(){
+        Console.WriteLine("\t\tQueue Count is:  " +theQueue.Count);
+        for(int i=0;i<theQueue.Count; i++) {
+            Console.WriteLine("\t\t[" + i + "]\t" + theQueue[i].name + "\t turns:\t" + theQueue[i].turns);
+        }
     // Console.WriteLine("Items in Queue:" + thePriorityQueue.Count());
-    thePriorityQueue.DeQueue_with_priority().Show();
 
 
         }
@@ -113,8 +127,8 @@ public class turnsQueue{
            if it's not his last turn, then get the value, and just decrease his turns count
            */
         Person person_to_take_a_turn = theQueue.DeQueue();
+        person_to_take_a_turn.turns--;
         if (person_to_take_a_turn.turns > 0) {
-            person_to_take_a_turn.turns--;
             theQueue.EnQueue(person_to_take_a_turn);
             }
         person_to_take_a_turn.showMe();
