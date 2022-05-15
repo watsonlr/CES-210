@@ -28,10 +28,24 @@ The Queue is made from an array of Node Objects
 */
 
 Console.WriteLine("Test 1");
-thePriorityQueue.EnQueue("Object 1",1);
 
-Console.WriteLine("after enque[0]: " + thePriorityQueue.Peek(0).value);
-// Console.WriteLine("DeQueing is: " + thePriorityQueue.DeQueue());
+thePriorityQueue.EnQueue("Object 0",5);
+thePriorityQueue.EnQueue("Object 1",1);
+thePriorityQueue.EnQueue("Object 2",6);
+thePriorityQueue.EnQueue("Object 3",3);
+thePriorityQueue.EnQueue("Object 4",1);
+thePriorityQueue.EnQueue("Object 5",4);
+thePriorityQueue.EnQueue("Object 6",7);
+thePriorityQueue.EnQueue("Object 7",2);
+
+// thePriorityQueue.Peek(6);
+
+// *Dequeue everything until empty */
+while (thePriorityQueue.Count()>0 ){
+    // Console.WriteLine("Items in Queue:" + thePriorityQueue.Count());
+    thePriorityQueue.DeQueue_with_priority().Show();
+}
+
 
 
 class myQueue {
@@ -49,9 +63,14 @@ class myQueue {
         theQueue.Add(node_to_add);
         }
 
-    public Node Peek(int element) {
-        return theQueue[element];
+    public void Peek(int element) {
+        Console.Write("Element[" + element + "] ");
+        theQueue[element].Show();
         }
+
+    public int Count() {
+        return theQueue.Count;
+    }
     
     public Node DeQueue_with_priority() {
 
@@ -59,7 +78,22 @@ class myQueue {
            The index of the highest priority is stored, and then that Node is returned and
            taken off the Queue
         */
+        int highest_index = 0;
+        int highest_priority = 0;
+        int last = theQueue.Count - 1;
+        int i = 0;
+        // Console.WriteLine("last is: " + last);
+        while(i <= last)
+            {
+            // Console.WriteLine("checking: [" + i + "]" + "Highest: " +highest_priority + "  at index: " + highest_index);
+            if (theQueue[i].priority > highest_priority) {
+                highest_index = i ; highest_priority =  theQueue[i].priority;
+                }
+            i++;
+            // Now we have the index of the greatest priority, so dequeue it
 
+            }
+        return DeQueue(highest_index);
         }
 
 
@@ -77,9 +111,13 @@ class Node {
     public object value = new object();    // Store anything as a value
     public int priority;                   // Priority is a number
     public Node(object val_in,int pri_in) {
-        Console.WriteLine("Node Created value:" + val_in + " Priority: " + pri_in);
+        // Console.WriteLine("Node Created value:" + val_in + " Priority: " + pri_in);
         value = val_in;
         priority = pri_in;  // Set the initial priority to 0
+    }
+    public void Show() {
+        Console.Write("Value :" + value + ":");
+        Console.WriteLine("\tWith priority: " + priority);
     }
 
 }
