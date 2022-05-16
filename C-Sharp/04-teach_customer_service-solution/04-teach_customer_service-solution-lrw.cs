@@ -14,15 +14,14 @@ Console.WriteLine("CSE212:  04-Teach - Problem 2 - Solution");  // Comment out t
 customerService myServiceQueue = new customerService();
 
 /***   TESTING ***/
-Console.WriteLine("Test 2");
+Console.WriteLine("-----------Begin Test 2-----------\n");
 myServiceQueue.add_new_customer();
 myServiceQueue.add_new_customer();
-/*
-Console.WriteLine("Before serving customers: ",service);
-service.serve_customer()
-service.serve_customer()
-Console.WriteLine("After serving customers: ",service);
-*/
+// Console.WriteLine("Before serving customers: ",service);
+myServiceQueue.serve_customer();
+myServiceQueue.serve_customer();
+//Console.WriteLine("After serving customers: ",service);
+Console.WriteLine("------------End Test 2-----------\n");
 
 
 
@@ -37,31 +36,31 @@ class customerService{
         customers_to_serve.EnQueue(new_one);
         }
 
+    public void serve_customer(){
+        /* For now, this just prints the name of the customer and takes him off the queue */
+        if (customers_to_serve.empty()) {
+            Console.WriteLine("No more customers left to serve");
+        } else {
+            Customer to_serve = customers_to_serve.DeQueue();
+            Console.WriteLine("Customer[#" + to_serve.problem + "]:\t Name:" + to_serve.name + "\tProblem: " + to_serve.problem);
+            }
+    }
+
     public class Customer {
         public int accountID; 
         public string name = "";
         public string problem = "";
         public Customer() {
             Console.Write("Enter the Customer name --> ");
-            name = Console.ReadLine();
+            name = name + Console.ReadLine();
             Console.Write("Enter the Problem --> ");
-            problem = Console.ReadLine();
+            problem = problem + Console.ReadLine();
             }
         }
     
     public class customerServiceQueue {
         public List<Customer> theQueue = new List<Customer>();
         // 
-
-        public void serve_customer(){
-            /* For now, this just prints the name of the customer and takes him off the queue */
-            if (empty()) {
-                Console.WriteLine("No more customers left to serve");
-            } else {
-                Customer to_serve = DeQueue();
-                Console.WriteLine("Customer[#" + "]: " + to_serve.name + "\tProblem: " + to_serve.problem);
-                }
-        }
 
         public void EnQueue(Customer to_add) {
             //         Add an item to the queue
@@ -87,7 +86,7 @@ class customerService{
         public void printWholeQueue(){
             Console.WriteLine("\t\tQueue Count is:  " +theQueue.Count);
             for(int i=0;i<theQueue.Count; i++) {
-                Console.WriteLine("\t\t[" + i + "]\t" + theQueue[i].name + "\t turns:\t" + theQueue[i].turns);
+                Console.WriteLine("\t\t[" + i + "]\t" + theQueue[i].name + "\t ID:\t" + theQueue[i].accountID);
                 }
             }
         public int Count() {
