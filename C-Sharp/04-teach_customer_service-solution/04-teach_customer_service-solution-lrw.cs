@@ -20,6 +20,8 @@ myServiceQueue.add_new_customer();
 // Console.WriteLine("Before serving customers: ",service);
 myServiceQueue.serve_customer();
 myServiceQueue.serve_customer();
+myServiceQueue.serve_customer();
+myServiceQueue.serve_customer();
 //Console.WriteLine("After serving customers: ",service);
 Console.WriteLine("------------End Test 2-----------\n");
 
@@ -31,7 +33,7 @@ class customerService{
     int customer_number = 1;  // should be unique and ever-increasing
     
     public void add_new_customer(){
-        Customer new_one = new Customer();
+        Customer new_one = new Customer(true);
         new_one.accountID = customer_number++;
         customers_to_serve.EnQueue(new_one);
         }
@@ -42,7 +44,7 @@ class customerService{
             Console.WriteLine("No more customers left to serve");
         } else {
             Customer to_serve = customers_to_serve.DeQueue();
-            Console.WriteLine("Customer[#" + to_serve.problem + "]:\t Name:" + to_serve.name + "\tProblem: " + to_serve.problem);
+            Console.WriteLine("Customer[#" + to_serve.accountID + "]:\t Name:" + to_serve.name + "\tProblem: " + to_serve.problem);
             }
     }
 
@@ -50,12 +52,15 @@ class customerService{
         public int accountID; 
         public string name = "";
         public string problem = "";
-        public Customer() {
-            Console.Write("Enter the Customer name --> ");
-            name = name + Console.ReadLine();
-            Console.Write("Enter the Problem --> ");
-            problem = problem + Console.ReadLine();
+        public Customer(bool ask_for_new) {
+            if (ask_for_new) {
+                Console.Write("Enter the Customer name --> ");
+                name = name + Console.ReadLine();
+                Console.Write("Enter the Problem --> ");
+                problem = problem + Console.ReadLine();
             }
+            }
+
         }
     
     public class customerServiceQueue {
@@ -69,8 +74,7 @@ class customerService{
             theQueue.Add(to_add);
             }
         public Customer DeQueue() {
-            Customer empty = new Customer();
-            empty.name="Empty";empty.accountID=0;
+            Customer empty = new Customer(false);  /* True means ask for a new one, else empty one */
             if (theQueue.Count == 0) {
                 Console.WriteLine("Queue EMPTY");
                 return empty;
