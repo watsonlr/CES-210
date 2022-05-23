@@ -11,21 +11,16 @@ GitHub repository, unshared Google Drive folder) is acceptable.
 ********/
 Console.WriteLine("CSE212:  05-Teach - Problem 2 - Solution");  // Comment out this line
 
- display_sums(numbers):
     /*
     Display pairs of numbers that sum to 10 using a set in O(n) time
     We are assuming that there are no duplicates in the list
     */
 
 List<int> values_seen = new List<int>();
-    for n in numbers:
-        # If 10-n is in the values_seen set then I know that
-        # I have previously seen a number that will sum with n 
-        # to equal 10.  Display that pair
-        if 10-n in values_seen:
-            Console.WriteLine(n, 10-n)
-        # Add this number to the values_seen set 
-        values_seen.add(n)
+
+    }
+
+
 
 display_sums([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])  
 /* 
@@ -38,17 +33,32 @@ Should show something like (order does not matter):
 
 
 Console.WriteLine("===========")
-display_sums([-20, -15, -10, -5, 0, 5, 10, 15, 20]) 
-"""
+display_sums([-20, -15, -10, -5, 0, 5, 10, 15, 20]) ;
+/*
 Should show something like (order does not matter):
-10 0
-15 -5
-20 -10
-"""
+    10 0
+    15 -5
+    20 -10
+ */
+
 Console.WriteLine("===========")
-display_sums([5, 11, 2, -4, 6, 8, -1])
-"""
+display_sums([5, 11, 2, -4, 6, 8, -1]);
+/* """
 Should show something like (order does not matter):
-8 2
--1 11
-"""
+    8 2
+    -1 11
+*/
+
+void display_sums(int[] numbers) {
+    foreach(var n in numbers)
+        {
+        /*  If 10-n is in the values_seen set then I know that
+             I have previously seen a number that will sum with n 
+            to equal 10.  Display that pair
+        */
+        if ((10-n) in values_seen)
+            {
+            Console.WriteLine(n, 10-n);
+            values_seen.add(n); // Add this number to the values_seen set 
+            }
+        }
