@@ -28,11 +28,17 @@ int[] test3 = {5, 11, 2, -4, 6, 8, -1} ;
     9 1 
     */ 
 
+//D:  List<int> testprint = new List<int>();
+//D :testprint.Add(1);
+//D :testprint.Add(3);
+//D :testprint.Add(6);
+//D :testprint.Add(7);
+//D:  if (false) {PrintArray(testprint);}
 
 Console.WriteLine("====test1======="); display_sums(test1) ;
-// Console.WriteLine("====test2======="); display_sums(test2) ;
-// Console.WriteLine("====test3======="); display_sums(test3);
-// Console.WriteLine("====   DONE  =======");
+Console.WriteLine("====test2======="); display_sums(test2) ;
+Console.WriteLine("====test3======="); display_sums(test3);
+Console.WriteLine("====   DONE  =======");
 /*
 Should show something like (order does not matter):
     10 0
@@ -46,6 +52,17 @@ Should show something like (order does not matter):
     -1 11
 */
 
+void PrintArray(List<int> toprint){
+    int i = 1;
+    Console.Write("[");
+    foreach (var item in toprint) {
+        Console.Write(String.Format("  {0}", item));i++;
+        if (i<=toprint.Count) {Console.Write(",");} else {Console.WriteLine(" ]");}
+        }
+    }
+
+
+
 void display_sums(int[] numbers) {
     // bool is_in;
     List<int> values_seen = new List<int>();
@@ -56,15 +73,16 @@ void display_sums(int[] numbers) {
             to equal 10.  Display that pair
         */
 
-        Console.WriteLine("Looking at: " + n);
-        // Console.WriteLine("Values Seen:" + values_seen);
-         values_seen.ForEach(x=>x.Print());
+        //D :Console.WriteLine("Looking at: " + n);
+        //D :Console.WriteLine("Values Seen:" + values_seen);
+        //D :Console.Write("Array:");
+        //D :PrintArray(values_seen);
 
         if (values_seen.Contains(10-n))
             {
             Console.Write("::: " + n + " :::: "); Console.WriteLine((10-n));
             }
-            values_seen.Append(n); // Add this number to the values_seen set 
-            Console.WriteLine("             Appended: " + n);
+            values_seen.Add(n); // Add this number to the values_seen set 
+            //D :Console.WriteLine("             Appended: " + n);
         }
     }
