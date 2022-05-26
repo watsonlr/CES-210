@@ -16,24 +16,23 @@ Console.WriteLine("CSE212:  05-Teach - Problem 2 - Solution");  // Comment out t
     We are assuming that there are no duplicates in the list
     */
 
-List<int> values_seen = new List<int>();
-
-    }
 
 
+int[] test1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10} ; 
+int[] test2 = {-20, -15, -10, -5, 0, 5, 10, 15, 20} ;
+int[] test3 = {5, 11, 2, -4, 6, 8, -1} ;
+/* Should show something like (order does not matter):
+    6 4
+    7 3
+    8 2
+    9 1 
+    */ 
 
-display_sums([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])  
-/* 
-Should show something like (order does not matter):
-6 4
-7 3
-8 2
-9 1 
-*/ 
 
-
-Console.WriteLine("===========")
-display_sums([-20, -15, -10, -5, 0, 5, 10, 15, 20]) ;
+Console.WriteLine("====test1======="); display_sums(test1) ;
+// Console.WriteLine("====test2======="); display_sums(test2) ;
+// Console.WriteLine("====test3======="); display_sums(test3);
+// Console.WriteLine("====   DONE  =======");
 /*
 Should show something like (order does not matter):
     10 0
@@ -41,8 +40,6 @@ Should show something like (order does not matter):
     20 -10
  */
 
-Console.WriteLine("===========")
-display_sums([5, 11, 2, -4, 6, 8, -1]);
 /* """
 Should show something like (order does not matter):
     8 2
@@ -50,15 +47,24 @@ Should show something like (order does not matter):
 */
 
 void display_sums(int[] numbers) {
+    // bool is_in;
+    List<int> values_seen = new List<int>();
     foreach(var n in numbers)
         {
         /*  If 10-n is in the values_seen set then I know that
              I have previously seen a number that will sum with n 
             to equal 10.  Display that pair
         */
-        if ((10-n) in values_seen)
+
+        Console.WriteLine("Looking at: " + n);
+        // Console.WriteLine("Values Seen:" + values_seen);
+         values_seen.ForEach(x=>x.Print());
+
+        if (values_seen.Contains(10-n))
             {
-            Console.WriteLine(n, 10-n);
-            values_seen.add(n); // Add this number to the values_seen set 
+            Console.Write("::: " + n + " :::: "); Console.WriteLine((10-n));
             }
+            values_seen.Append(n); // Add this number to the values_seen set 
+            Console.WriteLine("             Appended: " + n);
         }
+    }
