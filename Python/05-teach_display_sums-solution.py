@@ -18,6 +18,7 @@ def display_sums(numbers):
         # If 10-n is in the values_seen set then I know that
         # I have previously seen a number that will sum with n 
         # to equal 10.  Display that pair
+        print(values_seen)
         if 10-n in values_seen:
             print(n, 10-n)
         # Add this number to the values_seen set 

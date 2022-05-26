@@ -24,7 +24,7 @@ Should show something like (order does not matter):
 8 2
 9 1 
 """
-print("===========")
+print("=====test 2======")
 display_sums([-20, -15, -10, -5, 0, 5, 10, 15, 20]) 
 """
 Should show something like (order does not matter):
