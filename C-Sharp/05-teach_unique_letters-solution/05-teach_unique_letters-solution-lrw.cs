@@ -17,11 +17,9 @@ string test2 = "";
 List<string> test_strings = new List<string>();
 
 
-
-test_strings.Append(test0);
-test_strings.Append(test1);
-test_strings.Append(test2);
-    
+test_strings.Add(test0);
+test_strings.Add(test1);
+test_strings.Add(test2);
 PrintArray(test_strings);
 
 
@@ -44,7 +42,7 @@ bool duplicate_letters(string textin)
     bool found = false;
     Console.WriteLine("length in is: " + textin.Length);
     for(int i=0;i<textin.Length;i++) {
-        Console.WriteLine("doing: " + i + textin[i]);
+        // Console.WriteLine("doing: " + i + textin[i]);
         found = found ^ ((textin.Substring(i+1).IndexOf(textin[i])) > i);
         if (found) {break;}
         }
@@ -56,8 +54,8 @@ void PrintArray(List<string> toprint){
     Console.WriteLine("Got to Print Array");
     Console.Write("[");
     foreach (var item in toprint) {
-        Console.Write(String.Format("  {s}", item));i++;
-        if (i<=toprint.Count) {Console.Write(",");} else {Console.WriteLine(" ]");}
+        Console.Write(item);i++;
+        if (i<toprint.Count) {Console.Write(", ");} else {Console.WriteLine(" ]");}
         }
     }
 
