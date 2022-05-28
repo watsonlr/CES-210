@@ -16,6 +16,10 @@ string test1 = "abcdefghijklanopqrstuvwxyz";
 string test2 = "";
 List<string> test_strings = new List<string>();
 
+// put the test strings in an associative array for fun
+// Key goes first
+Dictionary<string, string> test_dict = new Dictionary<string, string>();
+
 
 test_strings.Add(test0);
 test_strings.Add(test1);
