@@ -21,6 +21,7 @@ Console.WriteLine("CSE212:  06-Prove");  // Comment out this line
 
 // Sample Test Cases (may not be comprehensive) 
 Console.WriteLine("\n=========== PROBLEM 1 TESTS ===========");
+
 Translator english_to_german = new Translator();
 Translator korean_to_english = new Translator();
 english_to_german.add_word("House","Haus");
@@ -38,7 +39,13 @@ Console.WriteLine("Translating from Korean: 'cheep' : " + korean_to_english.tran
 Console.WriteLine("Translating from Korean: 'pihengi' : " + korean_to_english.translate("pihengi"));  // Plane
 Console.WriteLine("Translating from Korean: 'chadongcha' : " + korean_to_english.translate("chadongcha"));  // Car
 
+Console.WriteLine("\n=========== PROBLEM 2 TESTS ===========");
+summarize_degrees grad_info = new summarize_degrees();
 
+grad_info.read_file("degrees.txt");
+
+
+/*********  Used for PROBLEM 1 **************/
 public class Translator
 {
     /* 
@@ -74,7 +81,52 @@ public class Translator
             return "???";
             }
         }
+}
 
 
-    public class
+
+/*********  Used for PROBLEM 2 **************/
+    public class summarize_degrees {
+        public Dictionary<string, string> fields = new Dictionary<string, string>();
+        int counter=0;
+        public void read_file(string filename) {
+
+        foreach(string line in System.IO.File.ReadLines(filename))
+            {
+            System.Console.WriteLine(line);  
+            counter++;  
+            }
+        }
+    }  
+
+
+    /* 
+    Read a census file and summarize the degrees (education)
+    earned by those contained in the file.  The summary
+    should be stored in a dictionary where the key is the
+    degree earned and the value is the number of people that 
+    have earned that degree.  The degree information is in
+    the 4th column of the file.  There is no header row in the
+    file.
+    degrees = dict()
+    with open(filename) as file_in:
+        for line in file_in:
+            fields = line.split(",") 
+
+            # ADD YOUR CODE HERE
+
+    return degrees
+
+/* # Sample Test Cases (may not be comprehensive) 
+print(summarize_degrees("census.txt")) # You might need to add a path for the file
+# Results may be in a different order:
+# {'Bachelors': 5355, 'HS-grad': 10501, '11th': 1175, 
+# 'Masters': 1723, '9th': 514, 'Some-college': 7291, 
+# 'Assoc-acdm': 1067, 'Assoc-voc': 1382, '7th-8th': 646, 
+# 'Doctorate': 413, 'Prof-school': 576, '5th-6th': 333, 
+# '10th': 933, '1st-4th': 168, 'Preschool': 51, 
+# '12th': 433}   
+*/
+
+
 }
