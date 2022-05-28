@@ -50,6 +50,21 @@ string census_file = "/Users/lynn/Repositories/CSE-212/census.txt";
 grad_info.read_file(census_file);   // You might need to add a path for the file
 grad_info.summarize();              // Printout everything
 
+/*************************/ 
+Console.WriteLine("\n=========== PROBLEM 3 TESTS ===========");
+anagram_check anagram_checker = new anagram_check();
+anagram_checker.show_anagram("CAT","ACT"); //# True
+anagram_checker.show_anagram("DOG", "GOOD") ;//# False
+anagram_checker.show_anagram("AABBCCDD", "ABCD"); //# False
+anagram_checker.show_anagram("ABCCD","ABBCD"); //# False
+anagram_checker.show_anagram("BC","AD"); //# False
+anagram_checker.show_anagram("Ab","Ba"); //# True
+anagram_checker.show_anagram("A Decimal Point", "Im a Dot in Place");  //# True
+anagram_checker.show_anagram("tom marvolo riddle", "i am lord voldemort"); //# True
+anagram_checker.show_anagram("Eleven plus Two", "Twelve Plus One"); //# True
+anagram_checker.show_anagram("Eleven plus One", "Twelve Plus One"); //# False
+
+
 
 /*********  Used for PROBLEM 1 **************/
 public class Translator
@@ -144,9 +159,7 @@ public class Translator
 
 
 class anagram_check
-{
-
-
+    {
     /* 
     Determine if 'word1' and 'word2' are anagrams.  An anagram
     is when the same letters in a word are re-organized into a 
@@ -161,45 +174,45 @@ class anagram_check
     example, 'Ab' and 'Ba' should be considered anagrams
 
     */
-    class letter_count{
-        Dictionary<char, int> the_letters = new Dictionary<char, int>();
-        letter_count(string wordin) {
+    public void show_anagram(string word1, string word2)
+        {
+            Console.Write("Comparing: '" + word1 + "' and '");
+            Console.WriteLine(word2 + "\t\t Anagram is: " + this.is_anagram(word1,word2));
+        }
+
+    public bool is_anagram(string word1, string word2)
+        {
+        bool match=true;
+        string WORD1; string WORD2;   // Uppercase, stripped of spaces
+        WORD1 = word1.Replace(" ",string.Empty).ToUpperInvariant();
+        WORD2 = word2.Replace(" ",string.Empty).ToUpperInvariant();
+        letter_count word1dict = new letter_count(WORD1);
+        letter_count word2dict = new letter_count(WORD2);
+        foreach(var aletter in word1dict.the_letters.Keys) {
+            if (word2dict.the_letters.ContainsKey(aletter)) {
+            // matching until proven not
+            match &= (word1dict.the_letters[aletter] == word2dict.the_letters[aletter]);
+            } else {
+                match = false;  // a letter that's in word1 and not word2
+                }
+            }
+        return match;
+        // now compare the dictionaries and see if each letter is used the same number of times.
+        }
+
+    public class letter_count{
+        public Dictionary<char, int> the_letters = new Dictionary<char, int>();
+        public letter_count(string wordin) {
             foreach(char letter in wordin) {
                 if(the_letters.ContainsKey(letter)) {
                     the_letters[letter]++;}
                 else {
-                    the_letters.Add(letter) = 1;
+                    the_letters.Add(letter,1);
                     }
-
                 }
             }
-
-            }
         }
-
-        }
-
-
-    bool is_anagram(string word1, string word2)
-    {
-        bool match =false;
-        string WORD1; string WORD2;   // Uppercase, stripped of spaces
-        string reverseWORD2 = "";
-        WORD1 = word1.Replace(" ",string.Empty).ToUpperInvariant();
-        WORD2 = word2.Replace(" ",string.Empty).ToUpperInvariant();
-        // now compare last to first
-        for (int i = WORD2.Length - 1; i >= 0; i--)
-            {
-                reverseWORD2 += WORD2[i];
-            }
-
-
-
-
-    return true;
     }
-
-}
 
 
 /*
