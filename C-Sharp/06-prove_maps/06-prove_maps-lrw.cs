@@ -143,7 +143,7 @@ public class Translator
 
 
 
-class is_anagram()
+class anagram_check
 {
 
 
@@ -160,11 +160,44 @@ class is_anagram()
     should ignore any spaces.  You should also ignore cases.  For 
     example, 'Ab' and 'Ba' should be considered anagrams
 
-    Reminder: You can access a letter by index in a Python string by 
-    using the [] notation.
     */
-    public is_anagram
+    class letter_count{
+        Dictionary<char, int> the_letters = new Dictionary<char, int>();
+        letter_count(string wordin) {
+            foreach(char letter in wordin) {
+                if(the_letters.ContainsKey(letter)) {
+                    the_letters[letter]++;}
+                else {
+                    the_letters.Add(letter) = 1;
+                    }
+
+                }
+            }
+
+            }
+        }
+
+        }
+
+
+    bool is_anagram(string word1, string word2)
+    {
+        bool match =false;
+        string WORD1; string WORD2;   // Uppercase, stripped of spaces
+        string reverseWORD2 = "";
+        WORD1 = word1.Replace(" ",string.Empty).ToUpperInvariant();
+        WORD2 = word2.Replace(" ",string.Empty).ToUpperInvariant();
+        // now compare last to first
+        for (int i = WORD2.Length - 1; i >= 0; i--)
+            {
+                reverseWORD2 += WORD2[i];
+            }
+
+
+
+
     return true;
+    }
 
 }
 
