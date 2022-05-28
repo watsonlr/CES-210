@@ -46,7 +46,7 @@ Console.WriteLine("Translating from Korean: 'chadongcha' : " + korean_to_english
 /****  Problem 2:  Degree instances  ****/
 Console.WriteLine("\n=========== PROBLEM 2 TESTS ===========");
 summarize_degrees grad_info = new summarize_degrees();
-string census_file = "/Users/lynn/Repositories/CSE-212/census.txt";
+string census_file = "./census.txt";
 grad_info.read_file(census_file);   // You might need to add a path for the file
 grad_info.summarize();              // Printout everything
 
