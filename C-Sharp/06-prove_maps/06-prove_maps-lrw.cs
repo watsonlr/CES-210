@@ -39,10 +39,16 @@ Console.WriteLine("Translating from Korean: 'cheep' : " + korean_to_english.tran
 Console.WriteLine("Translating from Korean: 'pihengi' : " + korean_to_english.translate("pihengi"));  // Plane
 Console.WriteLine("Translating from Korean: 'chadongcha' : " + korean_to_english.translate("chadongcha"));  // Car
 
+
+
+
+
+/****  Problem 2:  Degree instances  ****/
 Console.WriteLine("\n=========== PROBLEM 2 TESTS ===========");
 summarize_degrees grad_info = new summarize_degrees();
-
-grad_info.read_file("degrees.txt");
+string census_file = "/Users/lynn/Repositories/CSE-212/census.txt";
+grad_info.read_file(census_file);   // You might need to add a path for the file
+grad_info.summarize();              // Printout everything
 
 
 /*********  Used for PROBLEM 1 **************/
@@ -87,46 +93,45 @@ public class Translator
 
 /*********  Used for PROBLEM 2 **************/
     public class summarize_degrees {
-        public Dictionary<string, string> fields = new Dictionary<string, string>();
+        public Dictionary<string, int> degrees = new Dictionary<string, int>();
         int counter=0;
+        
         public void read_file(string filename) {
+        int degree_field = 3;
+        string the_degree;
+        /*
+        The Dictionary is going to be {field_name, count}
+        Read the file, separate into fields (CSV), 4th field is degree name.
 
-        foreach(string line in System.IO.File.ReadLines(filename))
-            {
-            System.Console.WriteLine(line);  
-            counter++;  
+        If the degree name exists, augment the count.
+        If it doesn't exist, add an entry with count=1
+        */
+
+        if (File.Exists(filename)) {
+            foreach(string line in System.IO.File.ReadLines(filename))
+                {
+                string[] textSplit = line.Split(",");
+                // System.Console.WriteLine(line);  
+                the_degree = textSplit[degree_field];
+                if (degrees.ContainsKey(the_degree))
+                    {
+                        degrees[the_degree]++;   // There is an entry, just increment the count
+                    } else {
+                    degrees.Add(the_degree,1);   // No entry yet, so add it to the dictionary
+                    }
+                counter++;  
+                }
+            } else {
+                System.Console.WriteLine("File: " + filename + " doesn't exist");  
+                return;
             }
         }
-    }  
-
-
-    /* 
-    Read a census file and summarize the degrees (education)
-    earned by those contained in the file.  The summary
-    should be stored in a dictionary where the key is the
-    degree earned and the value is the number of people that 
-    have earned that degree.  The degree information is in
-    the 4th column of the file.  There is no header row in the
-    file.
-    degrees = dict()
-    with open(filename) as file_in:
-        for line in file_in:
-            fields = line.split(",") 
-
-            # ADD YOUR CODE HERE
-
-    return degrees
-
-/* # Sample Test Cases (may not be comprehensive) 
-print(summarize_degrees("census.txt")) # You might need to add a path for the file
-# Results may be in a different order:
-# {'Bachelors': 5355, 'HS-grad': 10501, '11th': 1175, 
-# 'Masters': 1723, '9th': 514, 'Some-college': 7291, 
-# 'Assoc-acdm': 1067, 'Assoc-voc': 1382, '7th-8th': 646, 
-# 'Doctorate': 413, 'Prof-school': 576, '5th-6th': 333, 
-# '10th': 933, '1st-4th': 168, 'Preschool': 51, 
-# '12th': 433}   
-*/
-
-
-}
+        public void summarize() {
+            // This prints out the keys/values of the dictionary, sort optional
+            foreach(var pair in degrees)
+            {
+            Console.WriteLine($"{pair.Key}: Count={pair.Value}  ");
+            }
+            return;
+            }
+        }
