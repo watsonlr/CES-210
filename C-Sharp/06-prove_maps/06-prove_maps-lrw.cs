@@ -221,7 +221,7 @@ class anagram_check
 // #############
 
     public class Maze {
-    Dictionary<coordinate,directions> maze_points = new Dictionary<coordinate, directions>();
+    Dictionary<coordinate,directions> map = new Dictionary<coordinate, directions>();
     /*
         Defines a maze using a dictionary.  The dictionary is provided by the
         user when the Maze object is created.  The dictionary will contain the
@@ -238,70 +238,15 @@ class anagram_check
         If there is a wall, then display "Can't go that way!".  If there is no wall,
         then the 'curr_x' and 'curr_y' values should be changed.
     */
+    
+
     coordinate current_loc = new coordinate();
 
-    public void cant_go(string dir) {
-        Console.WriteLine("Can't go that way!" + dir);
-    }
+    public  Maze(){
+        // Constructor
+        map.Add({1,1},{false, true, false, true});
 
-    public void move_left(){
-        /*
-        Check to see if you can move left.  If you can, then move.  If you
-        can't move, then display "Can't go that way!"
-        */
-        if (maze_points[current_loc].left) {
-            current_loc.x--;
-            } else { cant_go("left"); }
-        }
-
-    public void move_right(){
-        /*
-        Check to see if you can move right.  If you can, then move.  If you
-        can't move, then display "Can't go that way!"
-        */        
-        if (maze_points[current_loc].right) {
-            current_loc.x++;
-            } else { cant_go("right"); }
-    }
-
-    public void move_up(){
-        /*
-        Check to see if you can move up.  If you can, then move.  If you
-        can't move, then display "Can't go that way!"
-        */
-        if (maze_points[current_loc].up) {
-            current_loc.y++;
-            } else { cant_go("up"); }
-        }
-
-    public void move_down(){
-        /*
-        Check to see if you can move down.  If you can, then move.  If you
-        can't move, then display "Can't go that way!"
-        */
-        if (maze_points[current_loc].down) {
-            current_loc.y--;
-            } else { cant_go("down"); }
-    }
-    
-    public void show_status(){
-        // Console.WriteLine("Current location (x={} , y={})".format(curr_x, curr_y));
-    }
-    }
-    class coordinate {
-        public int x;
-        public int y;
-    }
-    class directions {
-        public bool right;
-        public bool left;
-        public bool up;
-        public bool down;
-    }
-
-
-    # Sample Test Cases (may not be comprehensive) 
-    map =  {(1,1) : (False, True, False, True),
+     map =  [(1,1) : (False, True, False, True),
             (1,2) : (False, True, True, False),
             (1,3) : (False, False, False, False),
             (1,4) : (False, True, False, True),
@@ -336,7 +281,72 @@ class anagram_check
             (6,3) : (True, False, False, False),
             (6,4) : (False, False, False, False),
             (6,5) : (False, False, False, False),
-            (6,6) : (True, False, False, False)}
+            (6,6) : (True, False, False, False)}   // constructor takes the maze values.
+
+    }
+
+    public void cant_go(string dir) {
+        Console.WriteLine("Can't go that way!" + dir);
+    }
+
+    public void move_left(){
+        /*
+        Check to see if you can move left.  If you can, then move.  If you
+        can't move, then display "Can't go that way!"
+        */
+        if (map[current_loc].left) {
+            current_loc.x--;
+            } else { cant_go("left"); }
+        }
+
+    public void move_right(){
+        /*
+        Check to see if you can move right.  If you can, then move.  If you
+        can't move, then display "Can't go that way!"
+        */        
+        if (map[current_loc].right) {
+            current_loc.x++;
+            } else { cant_go("right"); }
+    }
+
+    public void move_up(){
+        /*
+        Check to see if you can move up.  If you can, then move.  If you
+        can't move, then display "Can't go that way!"
+        */
+        if (map[current_loc].up) {
+            current_loc.y++;
+            } else { cant_go("up"); }
+        }
+
+    public void move_down(){
+        /*
+        Check to see if you can move down.  If you can, then move.  If you
+        can't move, then display "Can't go that way!"
+        */
+        if (map[current_loc].down) {
+            current_loc.y--;
+            } else { cant_go("down"); }
+    }
+    
+    public void show_status(){
+        // Console.WriteLine("Current location (x={} , y={})".format(curr_x, curr_y));
+    }
+    }
+    class coordinate {
+        public int x;
+        public int y;
+    }
+    class directions {
+        public bool right;
+        public bool left;
+        public bool up;
+        public bool down;
+    }
+
+
+    # Sample Test Cases (may not be comprehensive) 
+    
 
     print("\n=========== PROBLEM 4 TESTS ===========")
     maze = Maze(map)
