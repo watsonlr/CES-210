@@ -216,17 +216,147 @@ class anagram_check
     }
 
 
-/*
-# Sample Test Cases (may not be comprehensive) 
-print("\n=========== PROBLEM 3 TESTS ===========")
-print(is_anagram("CAT","ACT")) # True
-print(is_anagram("DOG", "GOOD")) # False
-print(is_anagram("AABBCCDD", "ABCD")) # False
-print(is_anagram("ABCCD","ABBCD")) # False
-print(is_anagram("BC","AD")) # False
-print(is_anagram("Ab","Ba")) # True
-print(is_anagram("A Decimal Point", "Im a Dot in Place"))  # True
-print(is_anagram("tom marvolo riddle", "i am lord voldemort")) # True
-print(is_anagram("Eleven plus Two", "Twelve Plus One")) # True
-print(is_anagram("Eleven plus One", "Twelve Plus One")) # False
-*/
+// #############
+// # Problem 4 #
+// #############
+
+    public class Maze {
+    Dictionary<coordinate,directions> maze_points = new Dictionary<coordinate, directions>();
+    /*
+        Defines a maze using a dictionary.  The dictionary is provided by the
+        user when the Maze object is created.  The dictionary will contain the
+        following mapping:
+
+        (x,y) : (left, right, up, down)
+
+        'x' and 'y' are integers and represents locations in the maze.
+        'left', 'right', 'up', and 'down' are boolean are represent valid directions
+
+        If a direction is False, then we can assume there is a wall in that direction.
+        If a direction is True, then we can proceed.  
+
+        If there is a wall, then display "Can't go that way!".  If there is no wall,
+        then the 'curr_x' and 'curr_y' values should be changed.
+    */
+    coordinate current_loc = new coordinate();
+
+    public void cant_go(string dir) {
+        Console.WriteLine("Can't go that way!" + dir);
+    }
+
+    public void move_left(){
+        /*
+        Check to see if you can move left.  If you can, then move.  If you
+        can't move, then display "Can't go that way!"
+        */
+        if (maze_points[current_loc].left) {
+            current_loc.x--;
+            } else { cant_go("left"); }
+        }
+
+    public void move_right(){
+        /*
+        Check to see if you can move right.  If you can, then move.  If you
+        can't move, then display "Can't go that way!"
+        */        
+        if (maze_points[current_loc].right) {
+            current_loc.x++;
+            } else { cant_go("right"); }
+    }
+
+    public void move_up(){
+        /*
+        Check to see if you can move up.  If you can, then move.  If you
+        can't move, then display "Can't go that way!"
+        */
+        if (maze_points[current_loc].up) {
+            current_loc.y++;
+            } else { cant_go("up"); }
+        }
+
+    public void move_down(){
+        /*
+        Check to see if you can move down.  If you can, then move.  If you
+        can't move, then display "Can't go that way!"
+        */
+        if (maze_points[current_loc].down) {
+            current_loc.y--;
+            } else { cant_go("down"); }
+    }
+    
+    public void show_status(){
+        // Console.WriteLine("Current location (x={} , y={})".format(curr_x, curr_y));
+    }
+    }
+    class coordinate {
+        public int x;
+        public int y;
+    }
+    class directions {
+        public bool right;
+        public bool left;
+        public bool up;
+        public bool down;
+    }
+
+
+    # Sample Test Cases (may not be comprehensive) 
+    map =  {(1,1) : (False, True, False, True),
+            (1,2) : (False, True, True, False),
+            (1,3) : (False, False, False, False),
+            (1,4) : (False, True, False, True),
+            (1,5) : (False, False, True, True),
+            (1,6) : (False, False, True, False),
+            (2,1) : (True, False, False, True),
+            (2,2) : (True, False, True, True),
+            (2,3) : (False, False, True, True),
+            (2,4) : (True, True, True, False),
+            (2,5) : (False, False, False, False),
+            (2,6) : (False, False, False, False),
+            (3,1) : (False, False, False, False),
+            (3,2) : (False, False, False, False),
+            (3,3) : (False, False, False, False),
+            (3,4) : (True, True, False, True), 
+            (3,5) : (False, False, True, True),
+            (3,6) : (False, False, True, False),
+            (4,1) : (False, True, False, False),
+            (4,2) : (False, False, False, False),
+            (4,3) : (False, True, False, True),
+            (4,4) : (True, True, True, False),
+            (4,5) : (False, False, False, False),
+            (4,6) : (False, False, False, False),
+            (5,1) : (True, True, False, True),
+            (5,2) : (False, False, True, True),
+            (5,3) : (True, True, True, True),
+            (5,4) : (True, False, True, True),
+            (5,5) : (False, False, True, True),
+            (5,6) : (False, True, True, False),
+            (6,1) : (True, False, False, False),
+            (6,2) : (False, False, False, False),
+            (6,3) : (True, False, False, False),
+            (6,4) : (False, False, False, False),
+            (6,5) : (False, False, False, False),
+            (6,6) : (True, False, False, False)}
+
+    print("\n=========== PROBLEM 4 TESTS ===========")
+    maze = Maze(map)
+    maze.show_status() # Should be at (1,1)
+    maze.move_up() # Error
+    maze.move_left() # Error
+    maze.move_right() 
+    maze.move_right() # Error
+    maze.move_down()
+    maze.move_down()
+    maze.move_down()
+    maze.move_right()
+    maze.move_right()
+    maze.move_up()
+    maze.move_right()
+    maze.move_down()
+    maze.move_left()
+    maze.move_down() # Error
+    maze.move_right()
+    maze.move_down()
+    maze.move_down()
+    maze.move_right()
+    maze.show_status() # Should be at (6,6)
