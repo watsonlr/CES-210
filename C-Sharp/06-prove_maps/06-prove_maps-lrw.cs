@@ -65,6 +65,7 @@ anagram_checker.show_anagram("Eleven plus Two", "Twelve Plus One"); //# True
 anagram_checker.show_anagram("Eleven plus One", "Twelve Plus One"); //# False
 
 
+Console.WriteLine("\n=========== PROBLEM 4 TESTS ===========");
 
 /*********  Used for PROBLEM 1 **************/
 public class Translator
