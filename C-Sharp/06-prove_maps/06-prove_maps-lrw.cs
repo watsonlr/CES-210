@@ -222,6 +222,7 @@ class anagram_check
 
     public class Maze {
     Dictionary<coordinate,directions> map = new Dictionary<coordinate, directions>();
+    Dictionary<int[],bool[]> mapp = new Dictionary<int[], bool[]>();
     /*
         Defines a maze using a dictionary.  The dictionary is provided by the
         user when the Maze object is created.  The dictionary will contain the
@@ -241,10 +242,17 @@ class anagram_check
     
 
     coordinate current_loc = new coordinate();
+    directions d = new directions(false, false, true, true);
+    coordinate loc = new coordinate();
+    int[] a = {1,1};
+    mapp.Add(a,{False, True, False, True});
+
 
     public  Maze(){
+        loc.x = 1; loc.y=1;
+        map.Add(loc,d);
         // Constructor
-        map.Add({1,1},{false, true, false, true});
+        /* 
 
      map =  [(1,1) : (False, True, False, True),
             (1,2) : (False, True, True, False),
@@ -284,6 +292,7 @@ class anagram_check
             (6,6) : (True, False, False, False)}   // constructor takes the maze values.
 
     }
+     */
 
     public void cant_go(string dir) {
         Console.WriteLine("Can't go that way!" + dir);
@@ -338,13 +347,24 @@ class anagram_check
         public int y;
     }
     class directions {
+        public bool[] dirs;
+        public directions(bool r,bool l,bool u, bool d) {
+            dirs[0] = r;
+            dirs[1] = l;
+            dirs[2] = u;
+            dirs[3] = d;
+
+        }
+
+
         public bool right;
         public bool left;
         public bool up;
         public bool down;
     }
+    }
 
-
+/* 
     # Sample Test Cases (may not be comprehensive) 
     
 
