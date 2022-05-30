@@ -108,7 +108,6 @@ class doublyLinkedList
             }
         }
 
-
     /////////////////////
     // End Problem 2 //
     /////////////////////
@@ -116,74 +115,77 @@ class doublyLinkedList
     /////////////////////
     // Start Problem 3 //
     /////////////////////
-    void insert_after(double value)
-            {
-            /*
-            Insert a new node at the end (i.e. the tail) of the linked list.
-            */
-            // Create the new node
-            Node newNode = new Node();
-            // If the list is empty, then point both head and tail to the new node.
-            newNode.data = value;
-            newNode.next = null;    // Nobody after a new node at the tail
-            if (tail == null){
-                head = newNode;
-                tail = newNode;
-                }
-            // If the list is not empty, then only the tail will be affected.
-            else {
-                tail.next = newNode;    // Connect previous tail to the newNode
-                newNode.prev = tail;    // Connect new node to the previous tail
-                tail = newNode;         // Update the tail to point to the new node
-                }
-            }
+    Node find_a_node(double with_value){
+        Node search = head;
+        while (search.data != with_value) {
+            search = search.next;
+        }
+        if (search.data == with_value) {
+        return search; 
+        } else {
+        return null;
+        }
 
-
-
-
-    }
-
-
-    def insert_after(self, value, new_value):
+    void insert_after(double newValue, double findValue) {
         /*
         Insert 'new_value' after the first occurance of 'value' in
         the linked list.
         */
         // Search for the node that matches 'value' by starting at the 
         // head of the list.
-        curr = self.head
-        while curr is not None:
-            if curr.data == value:
-                // If the location of 'value' is at the end of the list,
-                // then we can call insert_tail to add 'new_value'
-                if curr == self.tail:
-                    self.insert_tail(new_value)
-                // For any other location of 'value', need to create a 
-                // new node and reconenct the links to insert.
-                else:
-                    new_node = LinkedList.Node(new_value)
-                    new_node.prev = curr       // Connect new node to the node containing 'value'
-                    new_node.next = curr.next  // Connect new node to the node after 'value'
-                    curr.next.prev = new_node  // Connect node after 'value' to the new node
-                    curr.next = new_node       // Connect the node containing 'value' to the new node
-                return // We can exit the function after we insert
-            curr = curr.next // Go to the next node to search for 'value'
-
-    //
-    //
-    def remove(self, value):
-        /*
-        Remove the first node that contains 'value'.
+        // Create the new node
+        Node foundNode = find_a_node(findValue);
+        /* if the 'found_node' is the tail AND the values don't match, then abort
+        // just insert it at the end
         */
-        pass
+        if (foundNode == tail ) {
+            if (findValue != tail.data){
+                Console.WriteLine("Tried to insert after a value :" + findValue + ": not found");
+                else {
+                insert_tail(newValue);
+                }
+            }
+        // If wasn't the last one, so there's a node found with the value of interest
+        else {
+            Node newNode = new Node();
+            newNode.data = newValue;
+            newNode.prev = foundNode;
+            newNode.next = foundNode.next;
+            foundNode.next = newNode;
+            }
+        }
+    }
 
-    //
+    bool is_head(Node thisnode) { return (thisnode == head); }
+    bool is_tail(Node thisnode) { return (thisnode == tail); }
+
+    void remove_node(Node to_remove) {
+        if (is_head(to_remove)) {remove_head();return;}
+        if (is_tail(to_remove)) {remove_tail();return;}
+        // Just someone in the middle
+        to_remove.prev.next = to_remove.next; //change link previous
+        to_remove.next.prev = to_remove.prev; //change link following
+    }
+
+
+    void remove_find(double findValue) {
+        Node foundNode = find_a_node(findValue);
+        if (foundNode == null) {
+            Console.WriteLine("Tried to delete a node with unfound value :" + findValue + ": not found");
+        else {
+            remove_node(foundNode);
+        }
+
+    /////////////////////
     // End Problem 3 //
-    //
+    /////////////////////
 
-    //
+
+
+
+    /////////////////////
     // Start Problem 4 //
-    //
+    /////////////////////
     def replace(self, old_value, new_value):
         /*
         Searrch for all instances of 'old_value' and replace the value 
