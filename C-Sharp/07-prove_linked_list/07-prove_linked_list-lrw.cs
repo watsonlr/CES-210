@@ -54,9 +54,9 @@ class doublyLinkedList
             }
         }
 
-    //
+    /////////////////////
     // Start Problem 1 //
-    //
+    /////////////////////
     void insert_tail(double value)
         {
         /*
@@ -67,7 +67,6 @@ class doublyLinkedList
         // If the list is empty, then point both head and tail to the new node.
         newNode.data = value;
         newNode.next = null;    // Nobody after a new node at the tail
-
         if (tail == null){
             head = newNode;
             tail = newNode;
@@ -80,43 +79,70 @@ class doublyLinkedList
             }
         }
 
-    //
-    // End Problem 1 //
-    //
-    
+    /////////////////////
+    // Start Problem 2 //
+    /////////////////////
+
+    void remove_tail()
+        {
+        /*
+        Remove the last node of the linked list.
+        */
+        if (tail == null){ // list is null, so just return
+            return;
+            } else {
+            tail = tail.prev;
+            tail.next = null;
+            }
+        }
+    void remove_head()
+        {
+        /*
+        Remove the first node of the linked list.
+        */
+        if (head == null){ // list is null, so just return
+            return;
+            } else {
+            head = head.next;
+            head.prev = null;
+            }
+        }
+
+
+    /////////////////////
+    // End Problem 2 //
+    /////////////////////
+
+    /////////////////////
+    // Start Problem 3 //
+    /////////////////////
+    void insert_after(double value)
+            {
+            /*
+            Insert a new node at the end (i.e. the tail) of the linked list.
+            */
+            // Create the new node
+            Node newNode = new Node();
+            // If the list is empty, then point both head and tail to the new node.
+            newNode.data = value;
+            newNode.next = null;    // Nobody after a new node at the tail
+            if (tail == null){
+                head = newNode;
+                tail = newNode;
+                }
+            // If the list is not empty, then only the tail will be affected.
+            else {
+                tail.next = newNode;    // Connect previous tail to the newNode
+                newNode.prev = tail;    // Connect new node to the previous tail
+                tail = newNode;         // Update the tail to point to the new node
+                }
+            }
+
 
 
 
     }
 
-    def remove_head(self):
-        /* 
-        Remove the first node (i.e. the head) of the linked list.
-        */
-        // If the list has only one item in it, then set head and tail 
-        // to None resulting in an empty list.  This condition will also
-        // cover an empty list.  Its okay to set to None again.
-        if self.head == self.tail:
-            self.head = None
-            self.tail = None
-        // If the list has more than one item in it, then only self.head
-        // will be affected.
-        elif self.head is not None:
-            self.head.next.prev = None  // Disconnect the second node from the first node
-            self.head = self.head.next  // Update the head to point to the second node
-
-    //
-    // Start Problem 2 //
-    //
-    def remove_tail(self):
-        /*
-        Remove the last node (i.e. the tail) of the linked list.
-        */
-        pass
-
-    //
-    // End Problem 2 //
-    //
 
     def insert_after(self, value, new_value):
         /*
@@ -144,7 +170,6 @@ class doublyLinkedList
             curr = curr.next // Go to the next node to search for 'value'
 
     //
-    // Start Problem 3 //
     //
     def remove(self, value):
         /*
