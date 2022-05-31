@@ -11,21 +11,59 @@ GitHub repository, unshared Google Drive folder) is acceptable.
 ********/
 Console.WriteLine("CSE212:  07-Prove - Problems");  // Comment out this line
 
-Console.WriteLine("\n=========== PROBLEM 1 TESTS ===========");
-doublyLinkedList dll = new doublyLinkedList();
 
-dll.insert_tail(1);
-dll.insert_tail(1);
-dll.insert_head(2);
-dll.insert_head(2);
-dll.insert_head(2);
-dll.insert_head(3);
-dll.insert_head(4);
-dll.insert_head(5);
-dll.showList(dll.ll); // linkedlist[5, 4, 3, 2, 2, 2, 1]
-dll.insert_tail(0);
-dll.insert_tail(-1);
-dll.showList(dll.ll); // linkedlist[5, 4, 3, 2, 2, 2, 1, 0, -1]
+testing run_tests = new testing();
+
+run_tests.test1();
+run_tests.test2();
+run_tests.test3();
+
+public class testing {
+    doublyLinkedList dll = new doublyLinkedList();
+
+    public void test1(){
+        Console.WriteLine("\n=========== PROBLEM 1 TESTS ===========");
+        dll.insert_tail(1);
+        dll.insert_tail(1);
+        dll.insert_head(2);
+        dll.insert_head(2);
+        dll.insert_head(2);
+        dll.insert_head(3);
+        dll.insert_head(4);
+        dll.insert_head(5);
+        dll.showList(dll.head); // linkedlist[5, 4, 3, 2, 2, 2, 1]
+        dll.insert_tail(0);
+        dll.insert_tail(-1);
+        dll.showList(dll.head); // linkedlist[5, 4, 3, 2, 2, 2, 1, 0, -1]
+        }
+    public void test2(){
+        Console.WriteLine("\n\n=========== PROBLEM 2 TESTS ===========");
+        dll.remove_tail();
+        dll.showList(dll.head); // linkedlist[5, 4, 3, 2, 2, 2, 1, 1, 0]
+        dll.remove_tail();
+        dll.showList(dll.head); // linkedlist[5, 4, 3, 2, 2, 2, 1, 1]
+        }
+    public void test3(){
+        Console.WriteLine("\n=========== PROBLEM 3 TESTS ===========");
+        dll.insert_after(3, 3.5);
+        dll.insert_after(5, 6);
+        dll.showList(dll.head); // linkedlist[5, 6, 4, 3, 3.5, 2, 2, 2, 1]
+        dll.remove_find(-1);
+        dll.showList(dll.head); // linkedlist[5, 6, 4, 3, 3.5, 2, 2, 2, 1]
+        dll.remove_find(3);
+        dll.showList(dll.head); // linkedlist[5, 6, 4, 3.5, 2, 2, 2, 1]
+        dll.remove_find(6);
+        dll.showList(dll.head); // linkedlist[5, 4, 3.5, 2, 2, 2, 1]
+        dll.remove_find(1);
+        dll.showList(dll.head); // linkedlist[5, 4, 3.5, 2, 2, 2]
+        dll.remove_find(7);
+        dll.showList(dll.head); // linkedlist[5, 4, 3.5, 2, 2, 2]
+        dll.remove_find(5);
+        dll.showList(dll.head); // linkedlist[4, 3.5, 2, 2, 2]
+        dll.remove_find(2);
+        dll.showList(dll.head); // linkedlist[4, 3.5, 2, 2]
+        }
+    }
 
 public class doublyLinkedList
     {
@@ -42,14 +80,15 @@ public class doublyLinkedList
         }  
 
 
-    Node head = null;
-    Node tail = null;
+    public Node head = null;
+    public Node tail = null;
 
     public Node ll = new Node();
 
     public void showList(Node list_to_show) {
         Node p = new Node() ;
-        p=list_to_show;
+        // p=list_to_show;
+        p = head;
         Console.Write("[");
         do {
             Console.Write(p.data);
@@ -73,6 +112,7 @@ public class doublyLinkedList
         Node newNode = new Node();
         // If the list is empty, then point both head and tail to the new node.
         newNode.data = value;
+        // Console.WriteLine("Inserting Head: " + value);
         newNode.prev = null;    // Nobody in front of a new node at the front
         if (head == null){
             head = newNode;
@@ -98,7 +138,7 @@ public class doublyLinkedList
         Node newNode = new Node();
         // If the list is empty, then point both head and tail to the new node.
         newNode.data = value;
-        Console.WriteLine("Inserting: " + value);
+        // Console.WriteLine("Inserting Tail: " + value);
         newNode.next = null;    // Nobody after a new node at the tail
         if (tail == null){
             head = newNode;
@@ -260,11 +300,6 @@ public class doublyLinkedList
 
 // Sample Test Cases (may not be comprehensive) 
 /* 
-Console.WriteLine("\n=========== PROBLEM 2 TESTS ===========")
-ll.remove_tail()
-print(ll) // linkedlist[5, 4, 3, 2, 2, 2, 1, 0]
-ll.remove_tail()
-print(ll) // linkedlist[5, 4, 3, 2, 2, 2, 1]
 
 Console.WriteLine("\n=========== PROBLEM 3 TESTS ===========")
 ll.insert_after(3, 3.5)
