@@ -17,6 +17,7 @@ testing run_tests = new testing();
 run_tests.test1();
 run_tests.test2();
 run_tests.test3();
+run_tests.test4();
 
 public class testing {
     doublyLinkedList dll = new doublyLinkedList();
@@ -31,39 +32,53 @@ public class testing {
         dll.insert_head(3);
         dll.insert_head(4);
         dll.insert_head(5);
-        dll.showList(dll.head); // linkedlist[5, 4, 3, 2, 2, 2, 1]
+        dll.showList(); // linkedlist[5, 4, 3, 2, 2, 2, 1]
         dll.insert_tail(0);
         dll.insert_tail(-1);
-        dll.showList(dll.head); // linkedlist[5, 4, 3, 2, 2, 2, 1, 0, -1]
+        dll.showList(); // linkedlist[5, 4, 3, 2, 2, 2, 1, 0, -1]
         }
     public void test2(){
         Console.WriteLine("\n\n=========== PROBLEM 2 TESTS ===========");
         dll.remove_tail();
-        dll.showList(dll.head); // linkedlist[5, 4, 3, 2, 2, 2, 1, 1, 0]
+        dll.showList(); // linkedlist[5, 4, 3, 2, 2, 2, 1, 1, 0]
         dll.remove_tail();
-        dll.showList(dll.head); // linkedlist[5, 4, 3, 2, 2, 2, 1, 1]
+        dll.showList(); // linkedlist[5, 4, 3, 2, 2, 2, 1, 1]
         }
     public void test3(){
         Console.WriteLine("\n=========== PROBLEM 3 TESTS ===========");
+        //dll.showList(); // linkedlist[5, 6, 4, 3, 3.5, 2, 2, 2, 1]
         dll.insert_after(3, 3.5);
+        //Console.WriteLine("\n dll.insert_after(3, 3.5)");
+        dll.showList(); // linkedlist[5, 6, 4, 3, 3.5, 2, 2, 2, 1]
+        //Console.WriteLine("\n dll.insert_after(5,6)");
         dll.insert_after(5, 6);
-        dll.showList(dll.head); // linkedlist[5, 6, 4, 3, 3.5, 2, 2, 2, 1]
+        dll.showList(); // linkedlist[5, 6, 4, 3, 3.5, 2, 2, 2, 1]
+        dll.remove_tail();
+        dll.showList(); // linkedlist[5, 6, 4, 3, 3.5, 2, 2, 2]
         dll.remove_find(-1);
-        dll.showList(dll.head); // linkedlist[5, 6, 4, 3, 3.5, 2, 2, 2, 1]
+        dll.showList(); // linkedlist[5, 6, 4, 3, 3.5, 2, 2, 2, 1]
         dll.remove_find(3);
-        dll.showList(dll.head); // linkedlist[5, 6, 4, 3.5, 2, 2, 2, 1]
+        dll.showList(); // linkedlist[5, 6, 4, 3.5, 2, 2, 2, 1]
         dll.remove_find(6);
-        dll.showList(dll.head); // linkedlist[5, 4, 3.5, 2, 2, 2, 1]
+        dll.showList(); // linkedlist[5, 4, 3.5, 2, 2, 2, 1]
         dll.remove_find(1);
-        dll.showList(dll.head); // linkedlist[5, 4, 3.5, 2, 2, 2]
+        dll.showList(); // linkedlist[5, 4, 3.5, 2, 2, 2]
         dll.remove_find(7);
-        dll.showList(dll.head); // linkedlist[5, 4, 3.5, 2, 2, 2]
+        dll.showList(); // linkedlist[5, 4, 3.5, 2, 2, 2]
         dll.remove_find(5);
-        dll.showList(dll.head); // linkedlist[4, 3.5, 2, 2, 2]
+        dll.showList(); // linkedlist[4, 3.5, 2, 2, 2]
         dll.remove_find(2);
-        dll.showList(dll.head); // linkedlist[4, 3.5, 2, 2]
+        dll.showList(); // linkedlist[4, 3.5, 2, 2]
         // should be  all
         }
+    public void test4(){
+        Console.WriteLine("\n=========== PROBLEM 4 TESTS ===========");
+        dll.replace(2, 10);
+        dll.showList(); // linkedlist[4, 3.5, 10, 10]
+        dll.replace(7, 5);
+        dll.showList(); // linkedlist[4, 3.5, 10, 10]
+        dll.replace(4, 100);
+        dll.showList(); // linkedlist[100, 3.5, 10, 10]
     }
 
 public class doublyLinkedList
@@ -81,16 +96,17 @@ public class doublyLinkedList
         }  
 
 
-    public Node head = null;
-    public Node tail = null;
+    Node head = null;
+    Node tail = null;
 
     public Node ll = new Node();
 
-    public void showList(Node list_to_show) {
+    public void showList() {
         Node p = new Node() ;
         // p=list_to_show;
         p = head;
-        Console.Write("[");
+        bool show_back = false;
+        Console.Write("\tForward:\t[");
         do {
             Console.Write(p.data);
             if (p.next !=null)
@@ -101,6 +117,21 @@ public class doublyLinkedList
             p=p.next;
             }
         while(p!=null);
+
+        if (show_back) {
+            Console.Write("\tBackward:\t[");
+            p = tail;
+            do {
+                Console.Write(p.data);
+                if (p.prev !=null)
+                    {Console.Write(", ");}
+                else {
+                    Console.WriteLine("]");
+                    }
+                p=p.prev;
+                }
+            while(p!=null);
+            }
         }
 
     public void insert_head(double value)
@@ -186,18 +217,22 @@ public class doublyLinkedList
     // Start Problem 3 //
     /////////////////////
     Node find_a_node(Node search_from, double with_value){
-        Node search = head;
-        while (search.data != with_value) {
+        
+        Node search = new Node();
+        search = search_from;
+        // Console.WriteLine("\nSearch from head is: " + search.data + " looking for with_value " + with_value +"\n");
+        while ((search.data != with_value) && (search != tail)) {
             search = search.next;
             }
         if (search.data == with_value) {
             return search; 
             } else {
+            // Console.WriteLine("\nSearch FAILED looking for: " + with_value + "  got: " + search.data );
             return null;
             }
         }
 
-    public void insert_after(double newValue, double findValue) {
+    public void insert_after(double findValue, double newValue) {
         /*
         Insert 'new_value' after the first occurance of 'value' in
         the linked list.
@@ -209,6 +244,7 @@ public class doublyLinkedList
         /* if the 'found_node' is the tail AND the values don't match, then abort
         // just insert it at the end
         */
+
         if (foundNode == tail ) {
             if (findValue != tail.data)
                 {
@@ -222,6 +258,7 @@ public class doublyLinkedList
             newNode.data = newValue;
             newNode.prev = foundNode;
             newNode.next = foundNode.next;
+            foundNode.next.prev = newNode;
             foundNode.next = newNode;
             }
             }
@@ -230,11 +267,20 @@ public class doublyLinkedList
     public bool is_tail(Node thisnode) { return (thisnode == tail); }
 
     public void remove_node(Node to_remove) {
-        if (is_head(to_remove)) {remove_head();return;}
-        if (is_tail(to_remove)) {remove_tail();return;}
-        // Just someone in the middle
-        to_remove.prev.next = to_remove.next; //change link previous
+        if (is_head(to_remove)) {
+            // Console.WriteLine("Removing a found head");
+            remove_head();return;}
+        if (is_tail(to_remove)) {
+            // Console.WriteLine("Removing a found tail");
+            remove_tail();return;}
+            /* Just someone in the middle
+            Console.WriteLine("Removing in the middle: " + to_remove.data);
+            Console.Write("Removing in the middle previous is: " + to_remove.prev.data);
+            Console.WriteLine("\tNext is: " + to_remove.next.data);
+            */
         to_remove.next.prev = to_remove.prev; //change link following
+        to_remove.prev.next = to_remove.next; //change link previous
+        //??????????
         }
 
     public void remove_find(double findValue) {
@@ -243,6 +289,7 @@ public class doublyLinkedList
             Console.WriteLine("Tried to delete a node with unfound value :" + findValue + ": not found");
             }
         else {
+            // Console.WriteLine("Remove a find, found :" + foundNode.data );
             remove_node(foundNode);
             }
         }
@@ -259,11 +306,15 @@ public class doublyLinkedList
     /////////////////////
     /* Search for all instances of 'old_value' and replace the value to 'new_value'.  */
     public void replace(double old_value, double new_value) {
-        Node found = find_a_node(head,old_value);
-        while ((found != tail) && (found.data == old_value )) {
-            found.data = new_value;
-            found = find_a_node(found.next,old_value);  // start search from the next location
-            }
+            Node found = new Node();
+            found = head;
+            do {
+                found = find_a_node(found,old_value);
+                if (found == null) {return;}
+                found.data = new_value;
+                found = found.next;
+                }
+            while ((found != null) && (found.data == old_value )) ;
         }
     /////////////////////
     // End Problem 4 //
@@ -293,6 +344,7 @@ public class doublyLinkedList
         return reversed_ll;
         }
     }
+}
         
 
     /////////////////////
@@ -321,13 +373,6 @@ print(ll) // linkedlist[4, 3.5, 2, 2, 2]
 ll.remove(2)
 print(ll) // linkedlist[4, 3.5, 2, 2]
 
-Console.WriteLine("\n=========== PROBLEM 4 TESTS ===========")
-ll.replace(2, 10)
-print(ll) // linkedlist[4, 3.5, 10, 10]
-ll.replace(7, 5)
-print(ll) // linkedlist[4, 3.5, 10, 10]
-ll.replace(4, 100)
-print(ll) // linkedlist[100, 3.5, 10, 10]
 
 
 Console.WriteLine("\n=========== PROBLEM 5 TESTS ===========")
