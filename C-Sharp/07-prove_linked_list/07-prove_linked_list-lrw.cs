@@ -62,6 +62,7 @@ public class testing {
         dll.showList(dll.head); // linkedlist[4, 3.5, 2, 2, 2]
         dll.remove_find(2);
         dll.showList(dll.head); // linkedlist[4, 3.5, 2, 2]
+        // should be  all
         }
     }
 
