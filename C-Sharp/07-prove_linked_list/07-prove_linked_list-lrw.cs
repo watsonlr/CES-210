@@ -18,9 +18,12 @@ run_tests.test1();
 run_tests.test2();
 run_tests.test3();
 run_tests.test4();
+run_tests.test5();
 
 public class testing {
     doublyLinkedList dll = new doublyLinkedList();
+    doublyLinkedList rdll = new doublyLinkedList();  //reversed dll
+
 
     public void test1(){
         Console.WriteLine("\n=========== PROBLEM 1 TESTS ===========");
@@ -81,6 +84,15 @@ public class testing {
         dll.showList(); // linkedlist[100, 3.5, 10, 10]
     }
 
+    public void test5(){
+        Console.WriteLine("\n=========== PROBLEM 5 TESTS ===========");
+        dll.remove_node 
+        dll.reverse();
+        dll.showList();  //// [10, 10, 3.5, 100]
+    }
+
+
+
 public class doublyLinkedList
     {
     /*
@@ -98,8 +110,11 @@ public class doublyLinkedList
 
     Node head = null;
     Node tail = null;
+    Node r_head = null;
+    Node r_tail = null;
 
     public Node ll = new Node();
+    public Node rll = new Node(); //reversed version
 
     public void showList() {
         Node p = new Node() ;
@@ -265,6 +280,7 @@ public class doublyLinkedList
 
     public bool is_head(Node thisnode) { return (thisnode == head); }
     public bool is_tail(Node thisnode) { return (thisnode == tail); }
+    public bool is_empty() { return ((tail == null) || (head==null)); }
 
     public void remove_node(Node to_remove) {
         if (is_head(to_remove)) {
@@ -323,58 +339,34 @@ public class doublyLinkedList
     /////////////////////
     // Start Problem 5 //
     /////////////////////
-    Node reversed_ll(Node tail_to_become_head) {
+    public void reverse() {
         /* Algorithm for reversing the list:
             Is the list empty or one element? If yes, then it is already reversed.
             Otherwise, create a new empty list.
-
-            In a loop, remove the first item from the old list and add it to the start of the new list.
+            In a loop,the first item from the old list and add it to the start of the new list.
             Loop until the first list is empty.
+
+            This leaves the dll inplace and creates a rdll 
+
         */
-        Node reversed_ll = new Node(); //start a new list
-        reversed_ll = tail_to_become_head;
-        reversed_ll.data = tail_to_become_head.data;
-        reversed_ll.next = tail_to_become_head.prev;
-        reversed_ll.prev = null;
-        while (tail_to_become_head.prev != null) {
-            Node addReversed = new Node(); //start a new list
-            addReversed.next = tail_to_become_head.prev;
-            addReversed.data = tail_to_become_head.data;
+
+        Node reverse_ptr = tail;
+        Node r_head = null;
+        reverse_ptr.next = null;
+        if ((r_head == null) && (r_tail == null)) {return;}
+
+        while (reverse_ptr != null)
+            {
+            Node reversed_ll = new Node(); //start a new list
+            if (r_head == null) {r_head = reversed_ll; // set the first node
+                reversed_ll.prev = null;
+                }
+            reversed_ll.data = reverse_ptr.data;
+            Console.WriteLine("Reverse added: " + reverse_ptr.data);
+            reversed_ll.next = reverse_ptr.prev;
+            reverse_ptr =      reverse_ptr.prev;
             }
-        return reversed_ll;
+            head = new_head;
         }
     }
 }
-        
-
-    /////////////////////
-    // End Problem 5 //
-    /////////////////////
-
-// Sample Test Cases (may not be comprehensive) 
-/* 
-
-Console.WriteLine("\n=========== PROBLEM 3 TESTS ===========")
-ll.insert_after(3, 3.5)
-ll.insert_after(5, 6)
-print(ll) // linkedlist[5, 6, 4, 3, 3.5, 2, 2, 2, 1]
-ll.remove(-1)
-print(ll) // linkedlist[5, 6, 4, 3, 3.5, 2, 2, 2, 1]
-ll.remove(3)
-print(ll) // linkedlist[5, 6, 4, 3.5, 2, 2, 2, 1]
-ll.remove(6)
-print(ll) // linkedlist[5, 4, 3.5, 2, 2, 2, 1]
-ll.remove(1)
-print(ll) // linkedlist[5, 4, 3.5, 2, 2, 2]
-ll.remove(7)
-print(ll) // linkedlist[5, 4, 3.5, 2, 2, 2]
-ll.remove(5)
-print(ll) // linkedlist[4, 3.5, 2, 2, 2]
-ll.remove(2)
-print(ll) // linkedlist[4, 3.5, 2, 2]
-
-
-
-Console.WriteLine("\n=========== PROBLEM 5 TESTS ===========")
-print(list(reversed(ll)))  //// [10, 10, 3.5, 100]
-*/
