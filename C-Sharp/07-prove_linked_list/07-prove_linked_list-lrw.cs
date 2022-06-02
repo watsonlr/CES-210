@@ -22,7 +22,7 @@ run_tests.test5();
 
 public class testing {
     doublyLinkedList dll = new doublyLinkedList();
-    doublyLinkedList rdll = new doublyLinkedList();  //reversed dll
+    public enum show_type {forward, backward, both};
 
 
     public void test1(){
@@ -35,60 +35,59 @@ public class testing {
         dll.insert_head(3);
         dll.insert_head(4);
         dll.insert_head(5);
-        dll.showList(); // linkedlist[5, 4, 3, 2, 2, 2, 1]
+        dll.showList(dll.head,show_type.forward); // linkedlist[5, 4, 3, 2, 2, 2, 1]
         dll.insert_tail(0);
         dll.insert_tail(-1);
-        dll.showList(); // linkedlist[5, 4, 3, 2, 2, 2, 1, 0, -1]
+        dll.showList(dll.head,show_type.forward); // linkedlist[5, 4, 3, 2, 2, 2, 1, 0, -1]
         }
     public void test2(){
         Console.WriteLine("\n\n=========== PROBLEM 2 TESTS ===========");
         dll.remove_tail();
-        dll.showList(); // linkedlist[5, 4, 3, 2, 2, 2, 1, 1, 0]
+        dll.showList(dll.head,show_type.forward); // linkedlist[5, 4, 3, 2, 2, 2, 1, 1, 0]
         dll.remove_tail();
-        dll.showList(); // linkedlist[5, 4, 3, 2, 2, 2, 1, 1]
+        dll.showList(dll.head,show_type.forward); // linkedlist[5, 4, 3, 2, 2, 2, 1, 1]
         }
     public void test3(){
         Console.WriteLine("\n=========== PROBLEM 3 TESTS ===========");
         //dll.showList(); // linkedlist[5, 6, 4, 3, 3.5, 2, 2, 2, 1]
         dll.insert_after(3, 3.5);
         //Console.WriteLine("\n dll.insert_after(3, 3.5)");
-        dll.showList(); // linkedlist[5, 6, 4, 3, 3.5, 2, 2, 2, 1]
+        dll.showList(dll.head,show_type.forward); // linkedlist[5, 6, 4, 3, 3.5, 2, 2, 2, 1]
         //Console.WriteLine("\n dll.insert_after(5,6)");
         dll.insert_after(5, 6);
-        dll.showList(); // linkedlist[5, 6, 4, 3, 3.5, 2, 2, 2, 1]
+        dll.showList(dll.head,show_type.forward); // linkedlist[5, 6, 4, 3, 3.5, 2, 2, 2, 1]
         dll.remove_tail();
-        dll.showList(); // linkedlist[5, 6, 4, 3, 3.5, 2, 2, 2]
+        dll.showList(dll.head,show_type.forward); // linkedlist[5, 6, 4, 3, 3.5, 2, 2, 2]
         dll.remove_find(-1);
-        dll.showList(); // linkedlist[5, 6, 4, 3, 3.5, 2, 2, 2, 1]
+        dll.showList(dll.head,show_type.forward); // linkedlist[5, 6, 4, 3, 3.5, 2, 2, 2, 1]
         dll.remove_find(3);
-        dll.showList(); // linkedlist[5, 6, 4, 3.5, 2, 2, 2, 1]
+        dll.showList(dll.head,show_type.forward); // linkedlist[5, 6, 4, 3.5, 2, 2, 2, 1]
         dll.remove_find(6);
-        dll.showList(); // linkedlist[5, 4, 3.5, 2, 2, 2, 1]
+        dll.showList(dll.head,show_type.forward); // linkedlist[5, 4, 3.5, 2, 2, 2, 1]
         dll.remove_find(1);
-        dll.showList(); // linkedlist[5, 4, 3.5, 2, 2, 2]
+        dll.showList(dll.head,show_type.forward); // linkedlist[5, 4, 3.5, 2, 2, 2]
         dll.remove_find(7);
-        dll.showList(); // linkedlist[5, 4, 3.5, 2, 2, 2]
+        dll.showList(dll.head,show_type.forward); // linkedlist[5, 4, 3.5, 2, 2, 2]
         dll.remove_find(5);
-        dll.showList(); // linkedlist[4, 3.5, 2, 2, 2]
+        dll.showList(dll.head,show_type.forward); // linkedlist[4, 3.5, 2, 2, 2]
         dll.remove_find(2);
-        dll.showList(); // linkedlist[4, 3.5, 2, 2]
+        dll.showList(dll.head,show_type.forward); // linkedlist[4, 3.5, 2, 2]
         // should be  all
         }
     public void test4(){
         Console.WriteLine("\n=========== PROBLEM 4 TESTS ===========");
         dll.replace(2, 10);
-        dll.showList(); // linkedlist[4, 3.5, 10, 10]
+        dll.showList(dll.head,show_type.forward); // linkedlist[4, 3.5, 10, 10]
         dll.replace(7, 5);
-        dll.showList(); // linkedlist[4, 3.5, 10, 10]
+        dll.showList(dll.head,show_type.forward); // linkedlist[4, 3.5, 10, 10]
         dll.replace(4, 100);
-        dll.showList(); // linkedlist[100, 3.5, 10, 10]
+        dll.showList(dll.head,show_type.forward); // linkedlist[100, 3.5, 10, 10]
     }
 
     public void test5(){
         Console.WriteLine("\n=========== PROBLEM 5 TESTS ===========");
-        dll.remove_node 
         dll.reverse();
-        dll.showList();  //// [10, 10, 3.5, 100]
+        dll.showList(dll.r_head,show_type.forward);  //// [10, 10, 3.5, 100]
     }
 
 
@@ -108,19 +107,20 @@ public class doublyLinkedList
         }  
 
 
-    Node head = null;
-    Node tail = null;
-    Node r_head = null;
-    Node r_tail = null;
+    public Node head = null;
+    public Node tail = null;
+    public Node r_head = null;
+    public Node r_tail = null;
 
     public Node ll = new Node();
     public Node rll = new Node(); //reversed version
 
-    public void showList() {
+    public void showList(Node starting_at,show_type showlist) {
         Node p = new Node() ;
         // p=list_to_show;
-        p = head;
-        bool show_back = false;
+        // forward dir True means show forward
+        p = starting_at;
+        bool show_back = ((showlist == show_type.backward) || (showlist == show_type.both));
         Console.Write("\tForward:\t[");
         do {
             Console.Write(p.data);
@@ -280,7 +280,7 @@ public class doublyLinkedList
 
     public bool is_head(Node thisnode) { return (thisnode == head); }
     public bool is_tail(Node thisnode) { return (thisnode == tail); }
-    public bool is_empty() { return ((tail == null) || (head==null)); }
+    public bool is_empty() { return ((tail == null) && (head==null)); }
 
     public void remove_node(Node to_remove) {
         if (is_head(to_remove)) {
@@ -349,24 +349,43 @@ public class doublyLinkedList
             This leaves the dll inplace and creates a rdll 
 
         */
+        //Storage list is rdll
 
-        Node reverse_ptr = tail;
-        Node r_head = null;
-        reverse_ptr.next = null;
-        if ((r_head == null) && (r_tail == null)) {return;}
+
+        // Case of a single node to be reversed.
+        if ((head == tail) && (head != null)) {
+            Node reversed_ll = new Node(); //start a new list
+            reversed_ll.data = head.data; //start a new list
+            reversed_ll.next = null; //start a new list
+            reversed_ll.prev = null; //start a new list
+            r_head = reversed_ll;
+            r_tail = reversed_ll;
+            return;
+            }
+        // But if we get here, there are more than one node
+        // start with the tail of the ll and put it into a new rll
+        Node reverse_ptr = tail;  // use this pointer to walk backwords thru the dll
 
         while (reverse_ptr != null)
             {
-            Node reversed_ll = new Node(); //start a new list
-            if (r_head == null) {r_head = reversed_ll; // set the first node
+            if (r_head == null) { // set the first node
+                Node reversed_ll = new Node(); //per each item on the list
                 reversed_ll.prev = null;
+                reversed_ll.data = reverse_ptr.data;
+                Console.WriteLine("Reverse first one added: " + reverse_ptr.data);
+                r_head = reversed_ll;
+                } else {  // add to the end
+                Node  add_to_end = new Node(); //per each item on the list
+                // still pointint to the previous
+                Console.WriteLine("Reverse added: " + reverse_ptr.data);
+                add_to_end.data = reverse_ptr.data;
+                reverse_ptr.next = add_to_end;  // forward link
+                add_to_end.prev =  reverse_ptr;  // backward link
+                add_to_end.next =  null;
+                reverse_ptr =      reverse_ptr.prev;
                 }
-            reversed_ll.data = reverse_ptr.data;
-            Console.WriteLine("Reverse added: " + reverse_ptr.data);
-            reversed_ll.next = reverse_ptr.prev;
-            reverse_ptr =      reverse_ptr.prev;
             }
-            head = new_head;
+        r_tail = add_to_end;
         }
     }
 }
