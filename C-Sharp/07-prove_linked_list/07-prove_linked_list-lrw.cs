@@ -89,8 +89,13 @@ public class testing {
         dll.insert_tail(11);
         dll.insert_tail(12);
         dll.reverse();
+        // dll.showList(dll.r_head,show_type.forward);  //// [10, 10, 3.5, 100]
+        dll.showList(dll.head,show_type.forward); // linkedlist[100, 3.5, 10, 10]
+        dll.showList(dll.tail,show_type.backward); // linkedlist[100, 3.5, 10, 10]
+        Console.WriteLine();
         dll.showList(dll.r_head,show_type.forward);  //// [10, 10, 3.5, 100]
         dll.showList(dll.r_tail,show_type.backward);  //// [10, 10, 3.5, 100]
+        // dll.showList(dll.r_tail,show_type.backward);  //// [10, 10, 3.5, 100]
     }
 
 
@@ -124,17 +129,20 @@ public class doublyLinkedList
         // forward dir True means show forward
         p = starting_at;
         bool show_back = ((showlist == show_type.backward) || (showlist == show_type.both));
-        Console.Write("\tForward:\t[");
-        do {
-            Console.Write(p.data);
-            if (p.next !=null)
-                {Console.Write(", ");}
-            else {
-                Console.WriteLine("]");
+        bool show_front = ((showlist == show_type.forward) || (showlist == show_type.both));
+        if (show_front) {
+            Console.Write("\tForward:\t[");
+            do {
+                Console.Write(p.data);
+                if (p.next !=null)
+                    {Console.Write(", ");}
+                else {
+                    Console.WriteLine("]");
+                    }
+                p=p.next;
                 }
-            p=p.next;
-            }
-        while(p!=null);
+            while(p!=null);
+        }
 
         if (show_back) {
             Console.Write("\tBackward:\t[");
@@ -389,8 +397,10 @@ public class doublyLinkedList
             add_to_end.prev = hold_prev;
             add_to_end.data = reverse_ptr.data;
             add_to_end.next =  null;
-            Console.WriteLine("Reverse added: " + reverse_ptr.data);
+            Console.Write("Reverse added: " + reverse_ptr.data);
+            Console.WriteLine("\t\tvalue of previous node is : " + add_to_end.prev.data);
             reverse_ptr = reverse_ptr.prev; // walk backwards
+            hold_prev = add_to_end;
             }
         }
     r_tail = hold_prev;
