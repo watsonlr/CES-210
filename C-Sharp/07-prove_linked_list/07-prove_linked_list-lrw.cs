@@ -86,8 +86,11 @@ public class testing {
 
     public void test5(){
         Console.WriteLine("\n=========== PROBLEM 5 TESTS ===========");
+        dll.insert_tail(11);
+        dll.insert_tail(12);
         dll.reverse();
         dll.showList(dll.r_head,show_type.forward);  //// [10, 10, 3.5, 100]
+        dll.showList(dll.r_tail,show_type.backward);  //// [10, 10, 3.5, 100]
     }
 
 
@@ -349,43 +352,48 @@ public class doublyLinkedList
             This leaves the dll inplace and creates a rdll 
 
         */
-        //Storage list is rdll
+        /// But if we get here, there are more than one node
+        // start with the tail of the ll and put it into a new rll
+        Node reverse_ptr = tail;  // use this pointer to walk backwords thru the dll
+        Node just_added = new Node(); //Storage list is rdll
+        Node hold_prev = new Node(); //per each item on the list
 
 
         // Case of a single node to be reversed.
-        if ((head == tail) && (head != null)) {
-            Node reversed_ll = new Node(); //start a new list
-            reversed_ll.data = head.data; //start a new list
-            reversed_ll.next = null; //start a new list
-            reversed_ll.prev = null; //start a new list
-            r_head = reversed_ll;
-            r_tail = reversed_ll;
-            return;
-            }
-        // But if we get here, there are more than one node
-        // start with the tail of the ll and put it into a new rll
-        Node reverse_ptr = tail;  // use this pointer to walk backwords thru the dll
-
-        while (reverse_ptr != null)
-            {
-            if (r_head == null) { // set the first node
-                Node reversed_ll = new Node(); //per each item on the list
-                reversed_ll.prev = null;
-                reversed_ll.data = reverse_ptr.data;
-                Console.WriteLine("Reverse first one added: " + reverse_ptr.data);
-                r_head = reversed_ll;
-                } else {  // add to the end
-                Node  add_to_end = new Node(); //per each item on the list
-                // still pointint to the previous
-                Console.WriteLine("Reverse added: " + reverse_ptr.data);
-                add_to_end.data = reverse_ptr.data;
-                reverse_ptr.next = add_to_end;  // forward link
-                add_to_end.prev =  reverse_ptr;  // backward link
-                add_to_end.next =  null;
-                reverse_ptr =      reverse_ptr.prev;
-                }
-            }
-        r_tail = add_to_end;
+    if ((head == tail) && (head != null)) {
+        Node reversed_ll = new Node(); //start a new list
+        reversed_ll.data = head.data; //start a new list
+        reversed_ll.next = null; //start a new list
+        reversed_ll.prev = null; //start a new list
+        r_head = reversed_ll;
+        r_tail = reversed_ll;
+        return;
         }
+    
+
+    while (reverse_ptr != null)  // walk backward thru the list 
+        {
+        Node  add_to_end = new Node(); //per each item on the list
+        if (r_head == null) { // set the first node
+            add_to_end.prev = null;
+            add_to_end.data = reverse_ptr.data;
+            add_to_end.next = null;
+            Console.WriteLine("Reverse first one added: " + add_to_end.data);
+            reverse_ptr = reverse_ptr.prev;  // go to the 2nd node
+            hold_prev = add_to_end;
+            r_head = add_to_end;  // Now r_head points to the first one in the new list
+            r_tail = add_to_end;  // A single node list has head/tail at the same point
+        } else {  // add to the end
+            // still pointint to the previous
+            hold_prev.next = add_to_end;
+            add_to_end.prev = hold_prev;
+            add_to_end.data = reverse_ptr.data;
+            add_to_end.next =  null;
+            Console.WriteLine("Reverse added: " + reverse_ptr.data);
+            reverse_ptr = reverse_ptr.prev; // walk backwards
+            }
+        }
+    r_tail = hold_prev;
     }
+}
 }
