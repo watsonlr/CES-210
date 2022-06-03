@@ -22,6 +22,18 @@ if (do_prob1.test_all()) {
     Console.WriteLine("Problem 1 FAILED");
     }
 
+problem2 do_prob2 = new problem2();
+if (do_prob2.test_all()) {
+    Console.WriteLine("Problem 2 passes");
+    } else {
+    Console.WriteLine("Problem 2 FAILED");
+    }
+
+
+
+
+
+
 class problem1
     {
     /*
@@ -59,15 +71,6 @@ class problem1
 //   Problem 2 # //
 ///////////////////
     class problem2 {
-    public List<string> permutations_choose(letters, size, word="")
-        {
-        List<string> a = {}
-            return 
-
-        }
-
-    }
-    
     /*
     Using recursion print permutations of length
     'size' from a list of 'letters'.  This function
@@ -85,61 +88,45 @@ class problem1
     and the length of the letters list).
     */
 
-// Sample Test Cases (may not be comprehensive) 
-print("\n=========== PROBLEM 2 TESTS ===========")
-permutations_choose(list("ABCD"),3)
-/*
-Expected Result (order may be different):
-ABC
-ABD
-ACB
-ACD
-ADB
-ADC
-BAC
-BAD
-BCA
-BCD
-BDA
-BDC
-CAB
-CAD
-CBA
-CBD
-CDA
-CDB
-DAB
-DAC
-DBA
-DBC
-DCA
-DCB
-*/
-
-print("---------")
-permutations_choose(list("ABCD"),2)  
-/*
-Expected Result (order may be different):
-AB
-AC
-AD
-BA
-BC
-BD
-CA
-CB
-CD
-DA
-DB
-DC
-*/
-print("---------")         
-permutations_choose(list("ABCD"),1)
-/* 
-Expected Result (order may be different):
-A
-B
-C
-D
-*/
-
+    int factorial(int n)
+        {
+        int sum=1;
+        if (n<=1) {return sum;}
+        return n * factorial(n-1);
+        }
+    public List<string> permutations_choose(string letters, int size)
+        {
+        List<string> words_found = new List<string>();
+        int number_of_words = factorial(letters.Length) / factorial(size);
+        Console.WriteLine("Number of combinationsfor " +letters.Length + "/" + size + " is : " + number_of_words);
+        return words_found;
+        }
+    public bool test(string letters, int size, string[] answers)
+        {
+        List<string> got_answer =  permutations_choose(letters,size);
+        // Now test all of combinations against the answers
+        while(got_answer.Count >1)
+            {string compare1 = got_answer.TakeLast;}
+        return true;
+        }
+    public bool test_all()
+        {
+        bool passed = true;
+        List<string> got_answer = new List<string>();
+        string letters = "ABCD";
+    // Sample Test Cases (may not be comprehensive) 
+        Console.WriteLine("\n=========== PROBLEM 2 TESTS ===========");
+        // got_answer = permutations_choose(letters,3);
+        // Expected Result (order may be different):
+        string[] expected1 = {"ABC", "ABD", "ACB", "ACD", "ADB", "ADC", "BAC", "BAD",
+                                "BCA", "BCD", "BDA", "BDC", "CAB", "CAD", "CBA", "CBD",
+                                "CDA", "CDB", "DAB", "DAC", "DBA", "DBC", "DCA", "DCB"};
+        string[] expected2 = {"AB", "AC", "AD", "BA", "BC", "BD", "CA", "CB", "CD", "DA", "DB", "DC"};
+        string[] expected3 = {"A", "B", "C", "D" };
+        passed &= test(letters,3,expected1);
+        passed &= test(letters,2,expected2);
+        passed &= test(letters,1,expected3);
+            /* Expected Result (order may be different): */
+        return passed;
+        }
+    }
