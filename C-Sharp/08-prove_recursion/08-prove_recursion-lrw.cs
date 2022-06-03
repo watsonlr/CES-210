@@ -32,19 +32,26 @@ class problem1
     n <= 0, just return 0.   A loop should not be used.
     */
 
-    int sum_squares_recursive(int n)
+    static int sum_squares_recursive(int n)
         {
-        return 0;
+            int totalSum;
+            if (n > 0)
+                { totalSum = n*n +sum_squares_recursive(n-1); }
+            else if (n == 1)
+                { totalSum = 1; }
+            else
+                { totalSum = 0; }
+            return totalSum; 
         }
-    bool test(int n_in, int answer)
+    bool test(int n_in, int the_answer)
         {
-        Console.WriteLine("\n=========== PROBLEM 1 TESTS ===========");
-        int the_answer= sum_squares_recursive(n_in);
-        Console.WriteLine("SSR of " + n_in +" is: " +);
-        return true;
+        int got_answer= sum_squares_recursive(n_in);
+        Console.WriteLine("SSR of " + n_in +" is: " + got_answer);
+        return (got_answer == the_answer);
         }
     public bool test_all() 
         {
-            return ((test(10,385)) && (test(100,338350)));
+        Console.WriteLine("\n=========== PROBLEM 1 TESTS ===========");
+        return ((test(10,385)) && (test(100,338350)));
         }
     }
