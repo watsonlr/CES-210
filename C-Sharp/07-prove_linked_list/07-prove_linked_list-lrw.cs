@@ -382,28 +382,30 @@ public class doublyLinkedList
     while (reverse_ptr != null)  // walk backward thru the list 
         {
         Node  add_to_end = new Node(); //per each item on the list
+        r_tail = add_to_end;
         if (r_head == null) { // set the first node
             add_to_end.prev = null;
             add_to_end.data = reverse_ptr.data;
             add_to_end.next = null;
-            Console.WriteLine("Reverse first one added: " + add_to_end.data);
+            // Console.WriteLine("Reverse first one added: " + add_to_end.data);
             reverse_ptr = reverse_ptr.prev;  // go to the 2nd node
             hold_prev = add_to_end;
             r_head = add_to_end;  // Now r_head points to the first one in the new list
-            r_tail = add_to_end;  // A single node list has head/tail at the same point
         } else {  // add to the end
             // still pointint to the previous
             hold_prev.next = add_to_end;
             add_to_end.prev = hold_prev;
             add_to_end.data = reverse_ptr.data;
             add_to_end.next =  null;
-            Console.Write("Reverse added: " + reverse_ptr.data);
-            Console.WriteLine("\t\tvalue of previous node is : " + add_to_end.prev.data);
+            // Console.Write("Reverse added: " + reverse_ptr.data);
+            // Console.WriteLine("\t\tvalue of previous node is : " + add_to_end.prev.data);
+            Console.WriteLine("\t\tvalue of tail is : " + r_tail.data);
             reverse_ptr = reverse_ptr.prev; // walk backwards
             hold_prev = add_to_end;
+            this.showList(this.r_head,show_type.forward);  //// [10, 10, 3.5, 100]
+            this.showList(this.r_tail,show_type.backward);  //// [10, 10, 3.5, 100]
             }
         }
-    r_tail = hold_prev;
     }
 }
 }
