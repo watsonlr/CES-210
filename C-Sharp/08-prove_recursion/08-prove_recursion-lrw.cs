@@ -31,7 +31,6 @@ class problem1
     to identify a base case (terminating case).  If the value of
     n <= 0, just return 0.   A loop should not be used.
     */
-
     static int sum_squares_recursive(int n)
         {
             int totalSum;
@@ -55,3 +54,92 @@ class problem1
         return ((test(10,385)) && (test(100,338350)));
         }
     }
+
+///////////////////
+//   Problem 2 # //
+///////////////////
+    class problem2 {
+    public List<string> permutations_choose(letters, size, word="")
+        {
+        List<string> a = {}
+            return 
+
+        }
+
+    }
+    
+    /*
+    Using recursion print permutations of length
+    'size' from a list of 'letters'.  This function
+    should assume that each letter is unique (i.e. the 
+    function does not need to find unique permutations).
+
+    In mathematics, we can calculate the number of permutations
+    using the formula: len(letters)! / (len(letters) - size)!
+
+    For example, if letters was [A,B,C] and size was 2 then
+    the following would display: AB, AC, BA, BC, CA, CB (might be in 
+    a different order).
+
+    You can assume that the size specified is always valid (between 1 
+    and the length of the letters list).
+    */
+
+// Sample Test Cases (may not be comprehensive) 
+print("\n=========== PROBLEM 2 TESTS ===========")
+permutations_choose(list("ABCD"),3)
+/*
+Expected Result (order may be different):
+ABC
+ABD
+ACB
+ACD
+ADB
+ADC
+BAC
+BAD
+BCA
+BCD
+BDA
+BDC
+CAB
+CAD
+CBA
+CBD
+CDA
+CDB
+DAB
+DAC
+DBA
+DBC
+DCA
+DCB
+*/
+
+print("---------")
+permutations_choose(list("ABCD"),2)  
+/*
+Expected Result (order may be different):
+AB
+AC
+AD
+BA
+BC
+BD
+CA
+CB
+CD
+DA
+DB
+DC
+*/
+print("---------")         
+permutations_choose(list("ABCD"),1)
+/* 
+Expected Result (order may be different):
+A
+B
+C
+D
+*/
+
