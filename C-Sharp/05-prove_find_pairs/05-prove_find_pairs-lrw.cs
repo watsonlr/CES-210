@@ -1,18 +1,35 @@
-# testing
-# adding back via MBP
-"""
-s a violation of BYU-Idaho Honor Code to post or share this code with others or 
+/********
+CSE212 
+(c) BYU-Idaho
+05-Prove - Problem 2
+
+It is a violation of BYU-Idaho Honor Code to post or share this code with others or 
 to post it online.  Storage into a personal and private repository (e.g. private
 GitHub repository, unshared Google Drive folder) is acceptable.
-"""
-from gettext import find
 
-def reverse(item):
-    return item [::-1]
+//--- Created from: dotnet new console. See https://aka.ms/new-console-template for more information ---//
+********/
+Console.WriteLine("CSE212:  05-Prove - Problem 2");  // Comment out this line
+/* 
+CSE212 
+(c) BYU-Idaho
+05-Prove - Problem 2
+
+It is a violation of BYU-Idaho Honor Code to post or share this code with others or 
+to post it online.  Storage into a personal and private repository (e.g. private
+GitHub repository, unshared Google Drive folder) is acceptable.
+*/
+
+class prove_find_pairs {
+
+    List<string> find_pairs(words)
+    {
+        
+        return 
 
 
-def find_pairs(words):
-    """
+    }
+    /*
     The words parameter contains a list of two character 
     words (lower case, no duplicates). Using sets, find an O(n) 
     solution for displaying all symmetric pairs of words.  
@@ -28,22 +45,13 @@ def find_pairs(words):
     As a special case, if the letters are the same (example: 'aa') then
     it would not match anything else (remember no the assumption above
     that there were no duplicates) and therefore should not be displayed.
-    """    
-      # new_set = set(words)
-    #new_list = list(map(reverse, words))
-    #track_items = []
-    #for item in words:
-        #if item in new_list and item != reverse(item) and reverse(item) not in track_items:
-            #print(item, reverse(item))
-        #track_items.append(item)
-    
-    pairs = set()
-    for (a, b) in words:
-        pairs.add((a, b))
-        if (a, b) == (a, a) or (a, b) == (b, b):
-            pairs.remove((a, b))
-        if (b, a) in pairs:
-            print((a, b), '&', (b, a))
+    */
+
+    bool tests{
+
+        return true;
+    }
+}
 
 find_pairs(["am","at","ma","if","fi"])      # ma & am, fi & if
 print("=============")
