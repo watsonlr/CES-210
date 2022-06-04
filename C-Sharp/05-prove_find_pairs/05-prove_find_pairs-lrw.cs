@@ -10,24 +10,25 @@ GitHub repository, unshared Google Drive folder) is acceptable.
 //--- Created from: dotnet new console. See https://aka.ms/new-console-template for more information ---//
 ********/
 Console.WriteLine("CSE212:  05-Prove - Problem 2");  // Comment out this line
-/* 
-CSE212 
-(c) BYU-Idaho
-05-Prove - Problem 2
-
-It is a violation of BYU-Idaho Honor Code to post or share this code with others or 
-to post it online.  Storage into a personal and private repository (e.g. private
-GitHub repository, unshared Google Drive folder) is acceptable.
-*/
-
+var h = new HashSet<string>();
 class prove_find_pairs {
 
-    List<string> find_pairs(words)
+    HashSet<string> strait = new HashSet<string>();
+    HashSet<string> reversed = new HashSet<string>();
+
+    public static string ReverseString(string myStr)
     {
-        
-        return 
-
-
+        char[] myArr = myStr.ToCharArray();
+        Array.Reverse(myArr);
+        return new string(myArr);
+    }
+    List<string> find_pairs(string[] words)
+    {
+    foreach (var word in words) {
+        strait.Add(word);
+        reversed.Add(ReverseString(word));
+    }
+        return ;
     }
     /*
     The words parameter contains a list of two character 
