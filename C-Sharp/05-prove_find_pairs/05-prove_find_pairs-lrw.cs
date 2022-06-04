@@ -10,7 +10,6 @@ GitHub repository, unshared Google Drive folder) is acceptable.
 //--- Created from: dotnet new console. See https://aka.ms/new-console-template for more information ---//
 ********/
 Console.WriteLine("CSE212:  05-Prove - Problem 2");  // Comment out this line
-var h = new HashSet<string>();
 class prove_find_pairs {
 
     HashSet<string> strait = new HashSet<string>();
@@ -27,7 +26,7 @@ class prove_find_pairs {
     foreach (var word in words) {
         strait.Add(word);
         reversed.Add(ReverseString(word));
-    }
+        }
         return ;
     }
     /*
