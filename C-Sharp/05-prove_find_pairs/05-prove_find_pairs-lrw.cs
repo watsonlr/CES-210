@@ -9,25 +9,37 @@ GitHub repository, unshared Google Drive folder) is acceptable.
 
 //--- Created from: dotnet new console. See https://aka.ms/new-console-template for more information ---//
 ********/
+
 Console.WriteLine("CSE212:  05-Prove - Problem 2");  // Comment out this line
+
+prove_find_pairs testThem = new prove_find_pairs().tests;
+
 class prove_find_pairs {
 
-    HashSet<string> strait = new HashSet<string>();
-    HashSet<string> reversed = new HashSet<string>();
+    HashSet<string> wordSet = new HashSet<string>();
+    // HashSet<string> reversed = new HashSet<string>();
 
-    public static string ReverseString(string myStr)
-    {
-        char[] myArr = myStr.ToCharArray();
-        Array.Reverse(myArr);
-        return new string(myArr);
-    }
+    /* 
+    Each word is guaranteed to be 2 letters, so it's faster to just swap the letters and check
+    instead of some big reversal.   So:
+        Add the word to the set
+        swap the two letters to make the check word
+        see if the check word is in the set
+        Can be done in a single pass
+    */
+
     List<string> find_pairs(string[] words)
     {
-    foreach (var word in words) {
-        strait.Add(word);
-        reversed.Add(ReverseString(word));
+    List<string> pairs = new List<string>();
+    foreach (string word in words) {
+        wordSet.Add(word);
+        string rev_word = string.Concat(word[1],word[0]);
+        if (wordSet.Contains(rev_word)) {
+            pairs.Add(word + " & " + rev_word);
+            }
+        // now check to see if the reverse is already in there
+        return pairs;
         }
-        return ;
     }
     /*
     The words parameter contains a list of two character 
@@ -47,8 +59,12 @@ class prove_find_pairs {
     that there were no duplicates) and therefore should not be displayed.
     */
 
-    bool tests{
+    public bool test(string[]wordlist,answer_pairs)
 
+    public bool test(wordlist,answer_paris)
+    public bool tests{
+    public bool tests{
+        
         return true;
     }
 }
