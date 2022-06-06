@@ -10,6 +10,8 @@ GitHub repository, unshared Google Drive folder) is acceptable.
 //--- Created from: dotnet new console. See https://aka.ms/new-console-template for more information ---//
 ********/
 Console.WriteLine("CSE212:  05-Prove - Problem 1");  // Comment out this line
+set_operations manual_set = new set_operations();
+manual_set.do_all_tests();
 
 
 class set_operations{
@@ -24,9 +26,10 @@ class set_operations{
             if (!set2.Contains(i)) {
                 the_intersection.Append(i);
             }
-        return the_intersection;
         }
-    public int[] union (int[] set1, int[] set2) {
+        return the_intersection;
+    }
+    int[] union (int[] set1, int[] set2) {
         /*
         Perform a union between 2 sets.  A union will contain all the items
         from both sets.   Do not use the set operators (+, -, *, &, |)
@@ -41,7 +44,7 @@ class set_operations{
             }
         return the_union;
     }
-    public bool test(int[] testing_in, int[] answer_in) {
+    bool test(int[] testing_in, int[] answer_in) {
         // To make sure they are sets, I'll use the built-in method, convert them both, and compare
         HashSet<int> t = testing_in.ToHashSet();
         HashSet<int> a = answer_in.ToHashSet();
