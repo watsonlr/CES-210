@@ -13,12 +13,35 @@ GitHub repository, unshared Google Drive folder) is acceptable.
 Console.WriteLine("CSE212:  05-Prove - Problem 2");  // Comment out this line
 
 prove_find_pairs testThem = new prove_find_pairs();
-string[] test1 = {"am","at","ma","if","fi"};
+string[] test1={"am","at","ma","if","fi"};
+string[] test2={"ab", "bc", "cd", "de", "ba"}; //  # ba & ab
+string[] test3={"ab","ba","ac","ad","da","ca"}; // # ba & ab, da & ad, ca & ac
+string[] test4={"ab", "ac"};//                    # None
+string[] test5={"ab", "aa", "ba"};//              # ba & ab
+string[] test6={"23","84","49","13","32","46","91","99","94","31","57","14"}; // 32 & 23, 94 & 49, 31 & 13
+
+Console.WriteLine("Test 1 ========= ");
+testThem.justprint(test1);
+Console.WriteLine("Test 2 ========= ");
+testThem.justprint(test2);
+Console.WriteLine("Test 3 ========= ");
+testThem.justprint(test3);
+Console.WriteLine("Test 4 ========= ");
+testThem.justprint(test4);
+Console.WriteLine("Test 5 ========= ");
+testThem.justprint(test5);
+Console.WriteLine("Test 6 ========= ");
+testThem.justprint(test6);
+/*
+print("=============")
+print("=============")
+print("=============")
+                                            */
+
 public class prove_find_pairs {
 
     HashSet<string> wordSet = new HashSet<string>();
     // HashSet<string> reversed = new HashSet<string>();
-
     /* 
     Each word is guaranteed to be 2 letters, so it's faster to just swap the letters and check
     instead of some big reversal.   So:
@@ -59,27 +82,15 @@ public class prove_find_pairs {
     that there were no duplicates) and therefore should not be displayed.
     */
 
-public string[] justprint(string[]pairs)
-    {
-        string[] found = this.find_pairs(pairs);
-   return found; 
-    }
+    public void justprint(string[]pairs)
+        {
+        List<String> found = find_pairs(pairs);
+        found.ForEach(p => Console.WriteLine($"   {p}"));
+        return;
+        }
 
     public bool test(string[]wordlist,string[] answer_pairs)
         {
             return false;
         }
 }
-/*
-print("=============")
-find_pairs(["ab", "bc", "cd", "de", "ba"])  # ba & ab
-print("=============")
-find_pairs(["ab","ba","ac","ad","da","ca"]) # ba & ab, da & ad, ca & ac
-print("=============")
-find_pairs(["ab", "ac"])                    # None
-print("=============")
-find_pairs(["ab", "aa", "ba"])              # ba & ab
-print("=============")
-find_pairs(["23","84","49","13","32","46","91","99","94","31","57","14"])
-                                            # 32 & 23, 94 & 49, 31 & 13
-                                            */
