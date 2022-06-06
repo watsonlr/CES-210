@@ -32,11 +32,6 @@ Console.WriteLine("Test 5 ========= ");
 testThem.justprint(test5);
 Console.WriteLine("Test 6 ========= ");
 testThem.justprint(test6);
-/*
-print("=============")
-print("=============")
-print("=============")
-                                            */
 
 public class prove_find_pairs {
 
@@ -55,7 +50,10 @@ public class prove_find_pairs {
     {
     List<string> pairs = new List<string>();
     foreach (string word in words) {
-        wordSet.Add(word);
+        // If the word is just the same 2 characters, then don't add it, because it's not going to have a reversed
+        if (word[0] != word[1]) {
+            wordSet.Add(word);
+        }
         string rev_word = string.Concat(word[1],word[0]);
         if (wordSet.Contains(rev_word)) {
             pairs.Add(word + " & " + rev_word);
