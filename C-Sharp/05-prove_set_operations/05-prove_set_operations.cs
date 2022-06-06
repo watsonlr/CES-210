@@ -32,9 +32,6 @@ class set_operations{
         int[] answer = {};
         return answer;
     }
-
-
-
     public bool test(int[] testing_in, int[] answer_in) {
         // To make sure they are sets, I'll use the built-in method, convert them both, and compare
         HashSet<int> t = testing_in.ToHashSet();
@@ -56,11 +53,9 @@ class set_operations{
         passed &= test(union(t1,t2),union2_ans);
 
         if (passed) {
-            Console.WriteLine("Congratulations!  Tests Passed");
+            Console.WriteLine("Congratulations!  Tests Passed");}
             else {
             Console.WriteLine("TESTS Failed");
             }
         }
-        }
-
     }
