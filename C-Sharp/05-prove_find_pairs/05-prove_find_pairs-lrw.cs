@@ -12,9 +12,9 @@ GitHub repository, unshared Google Drive folder) is acceptable.
 
 Console.WriteLine("CSE212:  05-Prove - Problem 2");  // Comment out this line
 
-prove_find_pairs testThem = new prove_find_pairs().tests;
-
-class prove_find_pairs {
+prove_find_pairs testThem = new prove_find_pairs();
+string[] test1 = {"am","at","ma","if","fi"};
+public class prove_find_pairs {
 
     HashSet<string> wordSet = new HashSet<string>();
     // HashSet<string> reversed = new HashSet<string>();
@@ -38,8 +38,8 @@ class prove_find_pairs {
             pairs.Add(word + " & " + rev_word);
             }
         // now check to see if the reverse is already in there
-        return pairs;
         }
+        return pairs;
     }
     /*
     The words parameter contains a list of two character 
@@ -59,17 +59,18 @@ class prove_find_pairs {
     that there were no duplicates) and therefore should not be displayed.
     */
 
-    public bool test(string[]wordlist,answer_pairs)
-
-    public bool test(wordlist,answer_paris)
-    public bool tests{
-    public bool tests{
-        
-        return true;
+public string[] justprint(string[]pairs)
+    {
+        string[] found = this.find_pairs(pairs);
+   return found; 
     }
-}
 
-find_pairs(["am","at","ma","if","fi"])      # ma & am, fi & if
+    public bool test(string[]wordlist,string[] answer_pairs)
+        {
+            return false;
+        }
+}
+/*
 print("=============")
 find_pairs(["ab", "bc", "cd", "de", "ba"])  # ba & ab
 print("=============")
@@ -81,3 +82,4 @@ find_pairs(["ab", "aa", "ba"])              # ba & ab
 print("=============")
 find_pairs(["23","84","49","13","32","46","91","99","94","31","57","14"])
                                             # 32 & 23, 94 & 49, 31 & 13
+                                            */
