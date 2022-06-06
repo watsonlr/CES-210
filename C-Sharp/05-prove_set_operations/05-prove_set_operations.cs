@@ -17,20 +17,29 @@ class set_operations{
         /*
         Perform an intersection between 2 sets.  An intersection will contain
         the items in common between both sets.  Do not use the set 
-        operators (+, -, *, &, |) and functions (intersection, union) 
-        that are built-in to Python.
+        operators (+, -, *, &, |) and functions (intersection, union) that are built-in to CSharp's HashSet.
         */
-        int[] answer = {};
-        return answer;
+        int[] the_intersection = {};
+        foreach (int i in set1) {
+            if (!set2.Contains(i)) {
+                the_intersection.Append(i);
+            }
+        return the_intersection;
         }
     public int[] union (int[] set1, int[] set2) {
         /*
         Perform a union between 2 sets.  A union will contain all the items
         from both sets.   Do not use the set operators (+, -, *, &, |)
-        and functions (intersection, union) that are built-in to Python.
+        and functions (intersection, union) that are built-in to CSharp's HashSet.
         */
-        int[] answer = {};
-        return answer;
+        int[] the_union = set1;  // Making an assumption that the array coming in IS a set (no duplicates)
+
+        foreach (int i in set2) {
+            if (!the_union.Contains(i)) {
+                the_union.Append(i);
+            }
+            }
+        return the_union;
     }
     public bool test(int[] testing_in, int[] answer_in) {
         // To make sure they are sets, I'll use the built-in method, convert them both, and compare
