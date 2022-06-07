@@ -21,13 +21,14 @@ class set_operations{
         the items in common between both sets.  Do not use the set 
         operators (+, -, *, &, |) and functions (intersection, union) that are built-in to CSharp's HashSet.
         */
-        int[] the_intersection = {};
+        List<int>  intersectionList = new List<int>();
         foreach (int i in set1) {
-            if (!set2.Contains(i)) {
-                the_intersection.Append(i);
+            if (set2.Contains(i)) {
+                intersectionList.Add(i);
             }
         }
-        return the_intersection;
+        int[] intersectionArray = intersectionList.ToArray();
+        return intersectionArray;
     }
     int[] union (int[] set1, int[] set2) {
         /*
@@ -35,22 +36,21 @@ class set_operations{
         from both sets.   Do not use the set operators (+, -, *, &, |)
         and functions (intersection, union) that are built-in to CSharp's HashSet.
         */
-        List<int>  the_union = new List<int>();
-        foreach(int i in set1){the_union.Add(i);}
-        Console.WriteLine("**** the_union is: ");
-        show_array(set1);
+        List<int>  unionList = new List<int>();
+        foreach(int i in set1){unionList.Add(i);}
+        // Console.WriteLine("**** unionList is: ");
+        // show_array(set1);
 
         foreach (int i in set2) {
-            if (!the_union.Contains(i)) {
-                the_union.Add(i);
+            if (!unionList.Contains(i)) {
+                unionList.Add(i);
                 //Console.WriteLine("Adding:" + i);
                 //show_array(the_union);
                 //Console.WriteLine("[");
             }
             }
-        int[] tu ;
-        foreach(int i in the_union){tu.Add(i);}
-        return the_union;
+        int[] unionArray = unionList.ToArray();
+        return unionArray;
     }
     public void show_array(int[] showme) {
         Console.Write("[");
@@ -63,32 +63,25 @@ class set_operations{
         // To make sure they are sets, I'll use the built-in method, convert them both, and compare
         HashSet<int> t = testing_in.ToHashSet();
         HashSet<int> a = answer_in.ToHashSet();
-        return (t==a);
+        return (t.SetEquals(a));
         }
     public void do_all_tests(){
         // Just goes thru a couple of test cases, checks to see that they pass and prints the status
         bool passed = true;
         int[] s1 = {1,2,3,4,5}; int[] s2 = {4,5,6,7,8};
         int[] intersect1_ans = {4,5}; int[] union1_ans = {1, 2, 3, 4, 5, 6, 7, 8};
-        // Test 1
-        Console.Write("s1 is: ");
-        show_array(s1);
-        Console.Write(" show_the_Union is: ");
-        show_array(union(s1,s2));
-        return;
 
         passed &= test(intersection(s1,s2),intersect1_ans);
         passed &= test(union(s1,s2),union1_ans);
+        if (passed) { Console.WriteLine("==========/tPassed Test 1"); } else { Console.WriteLine("==========\tFAILED Test 1"); return;
+        }
         // Test 2
         int[] t1 = {1,2,3,4,5}; int[] t2 = {6,7,8,9,10};
         int[] intersect2_ans = {}; int[] union2_ans = {1, 2, 3, 4, 5, 6, 7, 8,9,10};
+
         passed &= test(intersection(t1,t2),intersect2_ans);
         passed &= test(union(t1,t2),union2_ans);
-
-        if (passed) {
-            Console.WriteLine("Congratulations!  Tests Passed");}
-            else {
-            Console.WriteLine("TESTS Failed");
-            }
+        if (passed) { Console.WriteLine("==========/tPassed Test 2"); } else { Console.WriteLine("==========\tFAILED Test 2"); return;
         }
     }
+}
