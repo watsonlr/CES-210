@@ -73,7 +73,7 @@ class set_operations{
 
         passed &= test(intersection(s1,s2),intersect1_ans);
         passed &= test(union(s1,s2),union1_ans);
-        if (passed) { Console.WriteLine("==========/tPassed Test 1"); } else { Console.WriteLine("==========\tFAILED Test 1"); return;
+        if (passed) { Console.WriteLine("==========\tPassed Test 1"); } else { Console.WriteLine("==========\tFAILED Test 1"); return;
         }
         // Test 2
         int[] t1 = {1,2,3,4,5}; int[] t2 = {6,7,8,9,10};
@@ -81,7 +81,7 @@ class set_operations{
 
         passed &= test(intersection(t1,t2),intersect2_ans);
         passed &= test(union(t1,t2),union2_ans);
-        if (passed) { Console.WriteLine("==========/tPassed Test 2"); } else { Console.WriteLine("==========\tFAILED Test 2"); return;
+        if (passed) { Console.WriteLine("==========\tPassed Test 2"); } else { Console.WriteLine("==========\tFAILED Test 2"); return;
         }
     }
 }
