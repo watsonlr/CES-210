@@ -38,15 +38,10 @@ class set_operations{
         */
         List<int>  unionList = new List<int>();
         foreach(int i in set1){unionList.Add(i);}
-        // Console.WriteLine("**** unionList is: ");
-        // show_array(set1);
 
         foreach (int i in set2) {
             if (!unionList.Contains(i)) {
                 unionList.Add(i);
-                //Console.WriteLine("Adding:" + i);
-                //show_array(the_union);
-                //Console.WriteLine("[");
             }
             }
         int[] unionArray = unionList.ToArray();
