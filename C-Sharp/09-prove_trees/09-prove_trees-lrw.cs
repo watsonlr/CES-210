@@ -43,86 +43,50 @@ public class BST{
             }
         }
 
+    //###################
+    //# Start Problem 1 #
+    //###################
 
         Node place_to_insert(Node starting_at,int datain)
         {
-            Node found = new Node(datain);
+            // Recursive, start and find where this should go
             if (datain < starting_at.value)
                 {
-                    return place_to_insert(starting_at.left,datain);
+                return place_to_insert(starting_at.left,datain);
                 } else if (datain > starting_at.value) { 
-                    return place_to_insert(starting_at.right,datain);
+                return place_to_insert(starting_at.right,datain);
                 } else {
-                    return starting_at;
+                return starting_at;
                 }
-            found = starting_at;
-            starting_at.
-            return found;
-
         }
+    
+    
 
-
-        Node insert(Node starting_at,int datain){
-
-        Node to_insert = new Node(datain);
-        Node place_to_insert = starting_at;
-        if 
-        return to_insert;
+        public void insert(int datain)
         /*
         Insert 'data' into the BST.  If the BST
         is empty, then set the root equal to the new 
-        node.  Otherwise, use _insert to recursively
+        node.  Otherwise, use insert to recursively
         find the location to insert.
         The value returned is the pointer to the node we just inserted
         */
-        place_to_insert = find_node_with_value(starting_at, datain);
-
-        if self.root is None:
-            self.root = BST.Node(data)
-        else:
-            self._insert(data, self.root)  # Start at the root
-
+        {
+        Node to_insert = new Node(datain);
+        if (root == null)
+            {root=to_insert;
+            return;}
+        Node insert_at = place_to_insert(root,datain);
+        if (datain > insert_at.value)
+            {// point the right node
+             insert_at.right = to_insert;}
+        else if (datain < insert_at.value) {
+             insert_at.left = to_insert;
+             }
         }
-    ###################
-    # Start Problem 1 #
-    ###################
-    void _insert(self, data, node){
-
-        /*
-        This function will look for a place to insert a node
-        with 'data' inside of it.  The current sub-tree is
-        represented by 'node'.  This function is intended to be
-        called the first time by the insert function.
-        */
-        if (data < node.data){
-            # The data belongs on the left side.
-            if node.left is None:
-                # We found an empty spot
-                node.left = BST.Node(data)
-            else:
-                # Need to keep looking.  Call _insert
-                # recursively on the left sub-tree.
-                self._insert(data, node.left)
-        else {
-
-            # The data belongs on the right side.
-            if (node.right == null) {
-                //# We found an empty spot
-                node.right = BST.Node(data)
-                }
-            else {
-
-                //# Need to keep looking.  Call _insert
-                //# recursively on the right sub-tree.
-                _insert(data, node.right);
-                }
-            }
-            }
-    }
-    
     //#################
     //# End Problem 1 #
     //#################
+   
 
     def __contains__(self, data):
         /* 
@@ -138,14 +102,15 @@ public class BST{
     //###################
     //# Start Problem 2 #
     //###################
-    def _contains(self, data, node):
+     bool contains(Node start_at,int data) {
         /*
         This funciton will search for a node that contains
         'data'.  The current sub-tree being search is 
         represented by 'node'.  This function is intended
         to be called the first time by the __contains__ function.
         */
-        pass
+        return false;
+        }
 
     //#################
     //# End Problem 2 #
@@ -228,7 +193,7 @@ public class BST{
     //# End Problem 3 #
     //#################
 
-    def get_height(self):
+    int get_height(Node from_here) {
         /*
         Determine the height of the BST.  Note that an empty tree
         will have a height of 0 and a tree with one item (root) will
@@ -238,10 +203,13 @@ public class BST{
         _get_height on the root which will recursively determine the 
         height of the tree.
         */
-        if self.root is None:
-            return 0
-        else:
-            return self._get_height(self.root)  # Start at the root
+        if (from_here == null)
+            { return 0; }
+            else if (from_here == root)
+                { return 1; }
+                else
+                { return get_height(from_here.left)+1;}
+            }
 
     //###################
     //# Start Problem 4 #
