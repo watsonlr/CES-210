@@ -11,7 +11,7 @@ GitHub repository, unshared Google Drive folder) is acceptable.
 ********/
 Console.WriteLine("CSE212:  09-Prove - Problems");  // Comment out this line
 
-class BST{
+public class BST{
 
     /*
     Implement the Binary Search Tree (BST) data structure.  The Node 
@@ -21,16 +21,18 @@ class BST{
 
     Nodes are only instantiated from within the context of a BST
     */
+    public Node root;
 
-    class Node {
+
+    public class Node {
 
         /*
         Each node of the BST will have data and links to the 
         left and right sub-tree. 
         */
-        int value;
-        Node left =  new Node();
-        Node right = new Node();
+        public int value;
+        public Node left;
+        public Node right;
 
         public Node(int newvalue)
             {
@@ -42,21 +44,45 @@ class BST{
         }
 
 
+        Node place_to_insert(Node starting_at,int datain)
+        {
+            Node found = new Node(datain);
+            if (datain < starting_at.value)
+                {
+                    return place_to_insert(starting_at.left,datain);
+                } else if (datain > starting_at.value) { 
+                    return place_to_insert(starting_at.right,datain);
+                } else {
+                    return starting_at;
+                }
+            found = starting_at;
+            starting_at.
+            return found;
 
-    public void insert(int data){
-        
         }
+
+
+        Node insert(Node starting_at,int datain){
+
+        Node to_insert = new Node(datain);
+        Node place_to_insert = starting_at;
+        if 
+        return to_insert;
         /*
         Insert 'data' into the BST.  If the BST
         is empty, then set the root equal to the new 
         node.  Otherwise, use _insert to recursively
         find the location to insert.
+        The value returned is the pointer to the node we just inserted
         */
+        place_to_insert = find_node_with_value(starting_at, datain);
+
         if self.root is None:
             self.root = BST.Node(data)
         else:
             self._insert(data, self.root)  # Start at the root
 
+        }
     ###################
     # Start Problem 1 #
     ###################
@@ -132,7 +158,7 @@ class BST{
         This function is called when a loop	is performed:
 
         for value in my_bst:
-            print(value)
+            Console.WriteLine(value);
 
         */
         yield from self._traverse_forward(self.root)  # Start at the root
@@ -150,7 +176,7 @@ class BST{
         like:
 
         for value in my_bst:
-            print(value)
+            Console.WriteLine(value);
 
         The keyword 'yield' will return the value for the 'for' loop to
 	    use.  When the 'for' loop wants to get the next value, the code in
@@ -176,7 +202,7 @@ class BST{
         loop.
 
         for value in reversed(my_bst):
-            print(value)
+            Console.WriteLine(value);
 
         */        
         yield from self._traverse_backward(self.root)  # Start at the root
@@ -292,7 +318,7 @@ def _insert_middle(sorted_list, first, last, bst):
 
 
 # Sample Test Cases (may not be comprehensive) 
-print("\n=========== PROBLEM 1 TESTS ===========")
+Console.WriteLine("\n=========== PROBLEM 1 TESTS ===========");
 tree = BST()
 tree.insert(5)
 tree.insert(3)
@@ -305,38 +331,38 @@ tree.insert(10)
 tree.insert(1)
 tree.insert(6)
 for x in tree:
-    print(x)  # 1, 3, 4, 5, 6, 7, 10
+    Console.WriteLine(x);  // # 1, 3, 4, 5, 6, 7, 10
 
-print("\n=========== PROBLEM 2 TESTS ===========")
-print(3 in tree) # True
-print(2 in tree) # False
-print(7 in tree) # True
-print(6 in tree) # True
-print(9 in tree) # False
+Console.WriteLine("\n=========== PROBLEM 2 TESTS ===========");
+Console.WriteLine(3 in tree); // # True
+Console.WriteLine(2 in tree); // # False
+Console.WriteLine(7 in tree); // # True
+Console.WriteLine(6 in tree); // # True
+Console.WriteLine(9 in tree); // # False
 
-print("\n=========== PROBLEM 3 TESTS ===========")
+Console.WriteLine("\n=========== PROBLEM 3 TESTS ===========")
 for x in reversed(tree):
-    print(x)  # 10, 7, 6, 5, 4, 3, 1
+    Console.WriteLine(x); //  # 10, 7, 6, 5, 4, 3, 1
 
-print("\n=========== PROBLEM 4 TESTS ===========")
-print(tree.get_height()) # 3
+Console.WriteLine("\n=========== PROBLEM 4 TESTS ===========")
+Console.WriteLine(tree.get_height()); // # 3
 tree.insert(6)
-print(tree.get_height()) # 3
+Console.WriteLine(tree.get_height()); // # 3
 tree.insert(12)
-print(tree.get_height()) # 4
+Console.WriteLine(tree.get_height()); // # 4
 
 
-print("\n=========== PROBLEM 5 TESTS ===========")
+Console.WriteLine("\n=========== PROBLEM 5 TESTS ===========")
 tree1 = create_bst_from_sorted_list([10, 20, 30, 40, 50, 60])
 tree2 = create_bst_from_sorted_list([x for x in range(127)]) # 2^7 - 1 nodes
 tree3 = create_bst_from_sorted_list([x for x in range(128)]) # 2^7 nodes
 tree4 = create_bst_from_sorted_list([42])
 tree5 = create_bst_from_sorted_list([])
-print(tree1.get_height()) # 3
-print(tree2.get_height()) # 7 .. any higher and its not balanced
-print(tree3.get_height()) # 8 .. any higher and its not balanced
-print(tree4.get_height()) # 1
-print(tree5.get_height()) # 0
+Console.WriteLine(tree1.get_height()); // # 3
+Console.WriteLine(tree2.get_height()); // # 7 .. any higher and its not balanced
+Console.WriteLine(tree3.get_height()); // # 8 .. any higher and its not balanced
+Console.WriteLine(tree4.get_height()); // # 1
+Console.WriteLine(tree5.get_height()); // # 0
 */
 
 
