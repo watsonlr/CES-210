@@ -11,6 +11,105 @@ GitHub repository, unshared Google Drive folder) is acceptable.
 ********/
 Console.WriteLine("CSE212:  09-Prove - Problems");  // Comment out this line
 
+// # NOTE: Functions below are not part of the BST class below. 
+public class testing_BST {
+    BST new_sorted = new BST();
+
+    BST create_bst_from_sorted_list(sorted_list) {
+        /*
+        Given a sorted list (sorted_list), create a balanced BST.  If 
+        the values in the sorted_list were inserted in order from left
+        to right into the BST, then it would resemble a linked list (unbalanced). 
+        To get a balanced BST, the _insert_middle function is called to 
+        find the middle item in the list to add first to the BST.  The 
+        _insert_middle function takes the whole list but also takes a 
+        range (first to last) to consider.  For the first call, the full 
+        range of 0 to len()-1 used.
+        """
+        bst = BST()  # Create an empty BST to start with 
+        _insert_middle(sorted_list, 0, len(sorted_list)-1, bst)
+        return bst
+        */
+
+        return new_sorted;
+        }
+
+    public bool test1() {
+        //# Sample Test Cases (may not be comprehensive) 
+        Console.WriteLine("\n=========== PROBLEM 1 TESTS ===========");
+        BST tree = new BST();
+        tree.insert(5);
+        tree.insert(3);
+        tree.insert(7);
+        //# After implementing 'no duplicates' rule,
+        //# this next insert will have no effect on the tree.
+        tree.insert(7)  ;
+        tree.insert(4);
+        tree.insert(10);
+        tree.insert(1);
+        tree.insert(6);
+        //for x in tree:
+            //Console.WriteLine(x);  // # 1, 3, 4, 5, 6, 7, 10
+        return true;
+        }
+
+    public bool test2() {
+        //# Sample Test Cases (may not be comprehensive) 
+        Console.WriteLine("\n=========== PROBLEM 2 TESTS ===========");
+        BST tree = new BST();
+            /*
+            Console.WriteLine(3 in tree); // # True
+            Console.WriteLine(2 in tree); // # False
+            Console.WriteLine(7 in tree); // # True
+            Console.WriteLine(6 in tree); // # True
+            Console.WriteLine(9 in tree); // # False
+            */
+        // make it true if all the right answers:
+        return ( tree.contains(tree.root,3) && 
+                !tree.contains(tree.root,2) && 
+                 tree.contains(tree.root,7) && 
+                 tree.contains(tree.root,6) && 
+                !tree.contains(tree.root,9) );
+        }
+
+    public bool test3() {
+        Console.WriteLine("\n=========== PROBLEM 3 TESTS ===========");
+        //for x in reversed(tree):
+        //Console.WriteLine(x); //  # 10, 7, 6, 5, 4, 3, 1
+        return false;
+    }
+
+    public bool test4() {
+        Console.WriteLine("\n=========== PROBLEM 4 TESTS ===========");
+        /* Console.WriteLine(tree.get_height()); // # 3
+        tree.insert(6)
+        Console.WriteLine(tree.get_height()); // # 3
+        tree.insert(12)
+        Console.WriteLine(tree.get_height()); // # 4
+        */ 
+        return false;
+    }
+
+    public bool test5() {
+        Console.WriteLine("\n=========== PROBLEM 5 TESTS ===========");
+        /*
+        tree1 = create_bst_from_sorted_list([10, 20, 30, 40, 50, 60])
+        tree2 = create_bst_from_sorted_list([x for x in range(127)]) # 2^7 - 1 nodes
+        tree3 = create_bst_from_sorted_list([x for x in range(128)]) # 2^7 nodes
+        tree4 = create_bst_from_sorted_list([42]);
+        tree5 = create_bst_from_sorted_list([]);
+        Console.WriteLine(tree1.get_height()); // # 3
+        Console.WriteLine(tree2.get_height()); // # 7 .. any higher and its not balanced
+        Console.WriteLine(tree3.get_height()); // # 8 .. any higher and its not balanced
+        Console.WriteLine(tree4.get_height()); // # 1
+        Console.WriteLine(tree5.get_height()); // # 0
+        */
+
+        return false;
+        }
+
+}
+
 public class BST{
 
     /*
@@ -22,6 +121,10 @@ public class BST{
     Nodes are only instantiated from within the context of a BST
     */
     public Node root;
+    public BST() {
+        root = null;
+    }
+ 
 
 
     public class Node {
@@ -88,21 +191,10 @@ public class BST{
     //#################
    
 
-    def __contains__(self, data):
-        /* 
-        Checks if data is in the BST.  This function
-        supports the ability to use the 'in' keyword:
-
-        if 5 in my_bst:
-            ("5 is in the bst")
-
-        */
-        return self._contains(data, self.root)  # Start at the root
-
     //###################
     //# Start Problem 2 #
     //###################
-     bool contains(Node start_at,int data) {
+     public bool contains(Node start_at,int data) {
         /*
         This funciton will search for a node that contains
         'data'.  The current sub-tree being search is 
@@ -116,7 +208,9 @@ public class BST{
     //# End Problem 2 #
     //#################
 
-    def __iter__(self):
+    public void traversal()
+    {
+
         /*
         Perform a forward traversal (in order traversal) starting from 
 	    the root of the BST.  This is called a generator function.
@@ -126,9 +220,12 @@ public class BST{
             Console.WriteLine(value);
 
         */
-        yield from self._traverse_forward(self.root)  # Start at the root
+        // yield from self._traverse_forward(self.root)  # Start at the root
+    }
         
-    def _traverse_forward(self, node):
+    public void travers3_forward()
+    {
+    // def _traverse_forward(self, node):
         /*
         Does a forward traversal (in-order traversal) through the 
         BST.  If the node that we are given (which is the current
@@ -154,12 +251,14 @@ public class BST{
         This function is intended to be called the first time by 
         the __iter__ function.
         */
-        if node is not None:
-            yield from self._traverse_forward(node.left)
-            yield node.data
-            yield from self._traverse_forward(node.right)
-        
-    def __reversed__(self):
+        //if node is not None:
+            //yield from self._traverse_forward(node.left)
+            //yield node.data
+            //yield from self._traverse_forward(node.right)
+    }  
+
+    public void reversal() {
+
         /*
         Perform a formward traversal (in order traversal) starting from 
         the root of the BST.  This function is called when a the 
@@ -170,12 +269,13 @@ public class BST{
             Console.WriteLine(value);
 
         */        
-        yield from self._traverse_backward(self.root)  # Start at the root
+        // yield from self._traverse_backward(self.root)  # Start at the root
 
+        }
     //###################
     //# Start Problem 3 #
     //###################
-    def _traverse_backward(self, node):
+    public void traverse_backward(Node starting_from) {
         /*
         Does a backwards traversal (reverse in-order traversal) through the 
         BST.  If the node that we are given (which is the current
@@ -187,13 +287,17 @@ public class BST{
         This function is intended to be called the first time by 
         the __reversed__ function.        
         */
-        yield "???"  # Replace this when you implement your solution
+        //yield "???"  # Replace this when you implement your solution
+    }
 
     //#################
     //# End Problem 3 #
     //#################
 
-    int get_height(Node from_here) {
+    //###################
+    //# Start Problem 4 #
+    //###################
+    public int get_height(Node from_here) {
         /*
         Determine the height of the BST.  Note that an empty tree
         will have a height of 0 and a tree with one item (root) will
@@ -209,48 +313,20 @@ public class BST{
                 { return 1; }
                 else
                 { return get_height(from_here.left)+1;}
-            }
-
-    //###################
-    //# Start Problem 4 #
-    //###################
-    def _get_height(self, node):
-        /*
-        Determine the height of the BST.  The height of a sub-tree 
-        (represented by 'node') is 1 plus the height of either the 
-        left sub-tree or the right sub-tree (whichever one is bigger).
-
-        This function intended to be called the first time by 
-        get_height.
-        */
-        pass
-
+        }
     //#################
     //# End Problem 4 #
     //#################
 
 
-# NOTE: Functions below are not part of the BST class above. 
 
-def create_bst_from_sorted_list(sorted_list):
-    /*
-    Given a sorted list (sorted_list), create a balanced BST.  If 
-    the values in the sorted_list were inserted in order from left
-    to right into the BST, then it would resemble a linked list (unbalanced). 
-    To get a balanced BST, the _insert_middle function is called to 
-    find the middle item in the list to add first to the BST.  The 
-    _insert_middle function takes the whole list but also takes a 
-    range (first to last) to consider.  For the first call, the full 
-    range of 0 to len()-1 used.
-    """
-    bst = BST()  # Create an empty BST to start with 
-    _insert_middle(sorted_list, 0, len(sorted_list)-1, bst)
-    return bst
 
-###################
-# Start Problem 5 #
-###################
-def _insert_middle(sorted_list, first, last, bst):
+    //###################
+    //# Start Problem 5 #
+    //###################
+    public void insert_middle(Node start_from_tree, int first_value, int last_value) 
+    {
+
     /*
     This function will attempt to insert the item in the middle
     of 'sorted_list' into the 'bst' tree.  The middle is 
@@ -277,63 +353,11 @@ def _insert_middle(sorted_list, first, last, bst):
     not need to create new sublists when we make recursive calls.  Avoid 
     using list slicing to create sublists to solve this problem.
 
-    """
-    pass
-
-#################
-# End Problem 5 #
-#################
-
-
-# Sample Test Cases (may not be comprehensive) 
-Console.WriteLine("\n=========== PROBLEM 1 TESTS ===========");
-tree = BST()
-tree.insert(5)
-tree.insert(3)
-tree.insert(7)
-# After implementing 'no duplicates' rule,
-# this next insert will have no effect on the tree.
-tree.insert(7)  
-tree.insert(4)
-tree.insert(10)
-tree.insert(1)
-tree.insert(6)
-for x in tree:
-    Console.WriteLine(x);  // # 1, 3, 4, 5, 6, 7, 10
-
-Console.WriteLine("\n=========== PROBLEM 2 TESTS ===========");
-Console.WriteLine(3 in tree); // # True
-Console.WriteLine(2 in tree); // # False
-Console.WriteLine(7 in tree); // # True
-Console.WriteLine(6 in tree); // # True
-Console.WriteLine(9 in tree); // # False
-
-Console.WriteLine("\n=========== PROBLEM 3 TESTS ===========")
-for x in reversed(tree):
-    Console.WriteLine(x); //  # 10, 7, 6, 5, 4, 3, 1
-
-Console.WriteLine("\n=========== PROBLEM 4 TESTS ===========")
-Console.WriteLine(tree.get_height()); // # 3
-tree.insert(6)
-Console.WriteLine(tree.get_height()); // # 3
-tree.insert(12)
-Console.WriteLine(tree.get_height()); // # 4
-
-
-Console.WriteLine("\n=========== PROBLEM 5 TESTS ===========")
-tree1 = create_bst_from_sorted_list([10, 20, 30, 40, 50, 60])
-tree2 = create_bst_from_sorted_list([x for x in range(127)]) # 2^7 - 1 nodes
-tree3 = create_bst_from_sorted_list([x for x in range(128)]) # 2^7 nodes
-tree4 = create_bst_from_sorted_list([42])
-tree5 = create_bst_from_sorted_list([])
-Console.WriteLine(tree1.get_height()); // # 3
-Console.WriteLine(tree2.get_height()); // # 7 .. any higher and its not balanced
-Console.WriteLine(tree3.get_height()); // # 8 .. any higher and its not balanced
-Console.WriteLine(tree4.get_height()); // # 1
-Console.WriteLine(tree5.get_height()); // # 0
-*/
-
-
-
+    */
     }
-    }
+
+    //#################
+    //# End Problem 5 #
+    //#################
+
+}
