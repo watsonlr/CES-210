@@ -11,11 +11,18 @@ GitHub repository, unshared Google Drive folder) is acceptable.
 ********/
 Console.WriteLine("CSE212:  09-Prove - Problems");  // Comment out this line
 
+var do_tests = new testing_BST();
+int [] sortedlist = {1,2,3,4,5,6};
+BST test_tree = do_tests.create_bst_from_sorted_list(sortedlist);
+test_tree.print_search(test_tree.root);
+
 // # NOTE: Functions below are not part of the BST class below. 
 public class testing_BST {
-    BST new_sorted = new BST();
 
-    BST create_bst_from_sorted_list(sorted_list) {
+
+    public BST create_bst_from_sorted_list(int[] sorted_list)
+        {
+        BST new_sorted = new BST();
         /*
         Given a sorted list (sorted_list), create a balanced BST.  If 
         the values in the sorted_list were inserted in order from left
@@ -30,9 +37,15 @@ public class testing_BST {
         _insert_middle(sorted_list, 0, len(sorted_list)-1, bst)
         return bst
         */
+        
+        // new_sorted.print_search(new_sorted.root);
+        foreach(var val in sorted_list) {
+            new_sorted.insert(val);
+            }
 
         return new_sorted;
         }
+
 
     public bool test1() {
         //# Sample Test Cases (may not be comprehensive) 
@@ -56,7 +69,7 @@ public class testing_BST {
     public bool test2() {
         //# Sample Test Cases (may not be comprehensive) 
         Console.WriteLine("\n=========== PROBLEM 2 TESTS ===========");
-        BST tree = new BST();
+        BST? tree = new BST();
             /*
             Console.WriteLine(3 in tree); // # True
             Console.WriteLine(2 in tree); // # False
@@ -120,11 +133,25 @@ public class BST{
 
     Nodes are only instantiated from within the context of a BST
     */
-    public Node root;
+    public Node? root = null;
     public BST() {
         root = null;
     }
  
+    public void print_search(Node currently_at) {
+        if (currently_at.right != null) {
+            Console.WriteLine("RNode is: " + currently_at.value);
+            print_search(currently_at.right);
+            }
+        else
+            {
+            if (currently_at.left != null) {
+                Console.WriteLine("LNode is: " + currently_at.value);
+                print_search(currently_at.left);
+                }
+            }
+        }
+
 
 
     public class Node {
@@ -134,8 +161,8 @@ public class BST{
         left and right sub-tree. 
         */
         public int value;
-        public Node left;
-        public Node right;
+        public Node? left;
+        public Node? right;
 
         public Node(int newvalue)
             {
@@ -150,7 +177,7 @@ public class BST{
     //# Start Problem 1 #
     //###################
 
-        Node place_to_insert(Node starting_at,int datain)
+        Node place_to_insert(Node? starting_at,int datain)
         {
             // Recursive, start and find where this should go
             if (datain < starting_at.value)
@@ -297,7 +324,7 @@ public class BST{
     //###################
     //# Start Problem 4 #
     //###################
-    public int get_height(Node from_here) {
+    public int get_height(Node? from_here) {
         /*
         Determine the height of the BST.  Note that an empty tree
         will have a height of 0 and a tree with one item (root) will
