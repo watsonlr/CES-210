@@ -180,12 +180,14 @@ public class BST{
         Node place_to_insert(Node? starting_at,int datain)
         {
             // Recursive, start and find where this should go
+            Console.WriteLine(" starting_at data is: " + starting_at.value);
             if (datain < starting_at.value)
                 {
                 return place_to_insert(starting_at.left,datain);
                 } else if (datain > starting_at.value) { 
                 return place_to_insert(starting_at.right,datain);
                 } else {
+                Console.WriteLine(" returning >>  starting_at data is: " + starting_at.value);
                 return starting_at;
                 }
         }
@@ -204,13 +206,19 @@ public class BST{
         Node to_insert = new Node(datain);
         if (root == null)
             {root=to_insert;
+            Console.WriteLine("Made first node: " + to_insert.value);
             return;}
+
+        Console.WriteLine("Now looking for a place for node: " + datain );
         Node insert_at = place_to_insert(root,datain);
         if (datain > insert_at.value)
             {// point the right node
-             insert_at.right = to_insert;}
+             insert_at.right = to_insert;
+            Console.WriteLine("inserted_to_right: " + datain );
+            }
         else if (datain < insert_at.value) {
              insert_at.left = to_insert;
+            Console.WriteLine("inserted_to_leftt: " + datain );
              }
         }
     //#################
