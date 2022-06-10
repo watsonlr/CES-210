@@ -136,19 +136,17 @@ public class BST{
     public Node? root = null;
     public BST() {
         root = null;
-    }
+        }
  
     public void print_search(Node currently_at) {
+        Console.WriteLine(currently_at.value);
         if (currently_at.right != null) {
-            Console.WriteLine("RNode is: " + currently_at.value);
+            Console.Write("RNode next: ");
             print_search(currently_at.right);
             }
-        else
-            {
-            if (currently_at.left != null) {
-                Console.WriteLine("LNode is: " + currently_at.value);
+        if (currently_at.left != null) {
+                Console.Write("LNode next: ");
                 print_search(currently_at.left);
-                }
             }
         }
 
@@ -183,9 +181,14 @@ public class BST{
             Console.WriteLine(" starting_at data is: " + starting_at.value);
             if (datain < starting_at.value)
                 {
-                return place_to_insert(starting_at.left,datain);
+                    if (starting_at.left !=null)
+                        {return place_to_insert(starting_at.left,datain);}
+                        else 
+                        {return starting_at; }
                 } else if (datain > starting_at.value) { 
-                return place_to_insert(starting_at.right,datain);
+                    if (starting_at.left !=null)
+                        {return place_to_insert(starting_at.right,datain);}
+                        {return starting_at; }
                 } else {
                 Console.WriteLine(" returning >>  starting_at data is: " + starting_at.value);
                 return starting_at;
