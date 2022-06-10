@@ -12,9 +12,13 @@ GitHub repository, unshared Google Drive folder) is acceptable.
 Console.WriteLine("CSE212:  09-Prove - Problems");  // Comment out this line
 
 var do_tests = new testing_BST();
-int [] sortedlist = {1,2,3,4,5,6};
+
+/* int [] sortedlist = {1,2,3,4,5,6};
 BST test_tree = do_tests.create_bst_from_sorted_list(sortedlist);
 test_tree.print_search(test_tree.root);
+*/
+
+do_tests.test1();
 
 // # NOTE: Functions below are not part of the BST class below. 
 public class testing_BST {
@@ -40,7 +44,7 @@ public class testing_BST {
         
         // new_sorted.print_search(new_sorted.root);
         foreach(var val in sorted_list) {
-            new_sorted.Add(val);
+            new_sorted.insert(val);
             }
 
         return new_sorted;
@@ -51,18 +55,22 @@ public class testing_BST {
         //# Sample Test Cases (may not be comprehensive) 
         Console.WriteLine("\n=========== PROBLEM 1 TESTS ===========");
         BST tree = new BST();
-        tree.Add(5);
-        tree.Add(3);
-        tree.Add(7);
+        tree.insert(5);
+        tree.insert(3);
+        tree.insert(7);
         //# After implementing 'no duplicates' rule,
         //# this next insert will have no effect on the tree.
-        tree.Add(7);
-        tree.Add(4);
-        tree.Add(10);
-        tree.Add(1);
-        tree.Add(6);
+        tree.insert(7);
+        tree.insert(4);
+        tree.insert(10);
+        tree.insert(1);
+        tree.insert(6);
         //for x in tree:
             //Console.WriteLine(x);  // # 1, 3, 4, 5, 6, 7, 10
+        tree.print_search(tree.root,BST.searchType.inorder);
+        tree.print_search(tree.root,BST.searchType.right);
+        tree.print_search(tree.root,BST.searchType.left);
+
         return true;
         }
 
@@ -138,17 +146,51 @@ public class BST{
         root = null;
         }
  
+        public enum searchType {left,right,inorder};
+
     // This does an in-order search
     // 
-    public void print_search(Node currently_at) {
-        if (currently_at != null) {
-            print_search(currently_at.right);
-            Console.Write(currently_at.value + " ");
-            print_search(currently_at.left);
+    public void print_search(Node starthere,searchType searchby) {
+        Console.Write("Starting ");
+        switch(searchby){
+            case searchType.left:
+                Console.WriteLine("LeftFirst Search");
+                left_search(starthere);
+            break;
+            case searchType.right:
+                Console.WriteLine("RightFirst Search");
+                right_search(starthere);
+            break;
+            case searchType.inorder:
+                Console.WriteLine("InOrder Search");
+                inorder_search(starthere);
+            break;
             }
+        Console.WriteLine();
         }
 
-
+    
+    public void right_search(Node currently_at) {
+        if (currently_at != null) {
+            right_search(currently_at.right);
+            Console.Write(currently_at.value + " ");
+            right_search(currently_at.left);
+            }
+        }
+    public void inorder_search(Node currently_at) {
+        if (currently_at != null) {
+            inorder_search(currently_at.right);
+            Console.Write(currently_at.value + " ");
+            inorder_search(currently_at.left);
+            }
+        }
+    public void left_search(Node currently_at) {
+        if (currently_at != null) {
+            left_search(currently_at.right);
+            Console.Write(currently_at.value + " ");
+            left_search(currently_at.left);
+            }
+        }
 
     public class Node {
 
@@ -173,29 +215,15 @@ public class BST{
     //# Start Problem 1 #
     //###################
 
-        Node place_to_insert(Node? starting_at,int datain)
-        {
-            // Recursive, start and find where this should go
-            Console.WriteLine(" starting_at data is: " + starting_at.value);
-            if (datain < starting_at.value)
-                {
-                    if (starting_at.left !=null)
-                        {return place_to_insert(starting_at.left,datain);}
-                        else 
-                        {return starting_at; }
-                } else if (datain > starting_at.value) { 
-                    if (starting_at.left !=null)
-                        {return place_to_insert(starting_at.right,datain);}
-                        {return starting_at; }
-                } else {
-                Console.WriteLine(" returning >>  starting_at data is: " + starting_at.value);
-                return starting_at;
-                }
-        }
-    
-
-    public bool Add(int value)
+    public bool insert(int value)
     {
+        /*
+        Insert 'data' into the BST.  If the BST
+        is empty, then set the root equal to the new 
+        node.  Otherwise, use insert to recursively
+        find the location to insert.
+        The value returned is the pointer to the node we just inserted
+        */
         Node before = null, after = this.root;
  
         while (after != null)
@@ -229,34 +257,6 @@ public class BST{
     }
 
     
-
-        public void insert(int datain)
-        /*
-        Insert 'data' into the BST.  If the BST
-        is empty, then set the root equal to the new 
-        node.  Otherwise, use insert to recursively
-        find the location to insert.
-        The value returned is the pointer to the node we just inserted
-        */
-        {
-        Node to_insert = new Node(datain);
-        if (root == null)
-            {root=to_insert;
-            Console.WriteLine("Made first node: " + to_insert.value);
-            return;}
-
-        Console.WriteLine("Now looking for a place for node: " + datain );
-        Node insert_at = place_to_insert(root,datain);
-        if (datain > insert_at.value)
-            {// point the right node
-             insert_at.right = to_insert;
-            Console.WriteLine("inserted_to_right: " + datain );
-            }
-        else if (datain < insert_at.value) {
-             insert_at.left = to_insert;
-            Console.WriteLine("inserted_to_leftt: " + datain );
-             }
-        }
     //#################
     //# End Problem 1 #
     //#################
