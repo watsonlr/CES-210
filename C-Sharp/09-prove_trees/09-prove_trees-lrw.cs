@@ -40,7 +40,7 @@ public class testing_BST {
         
         // new_sorted.print_search(new_sorted.root);
         foreach(var val in sorted_list) {
-            new_sorted.insert(val);
+            new_sorted.Add(val);
             }
 
         return new_sorted;
@@ -51,16 +51,16 @@ public class testing_BST {
         //# Sample Test Cases (may not be comprehensive) 
         Console.WriteLine("\n=========== PROBLEM 1 TESTS ===========");
         BST tree = new BST();
-        tree.insert(5);
-        tree.insert(3);
-        tree.insert(7);
+        tree.Add(5);
+        tree.Add(3);
+        tree.Add(7);
         //# After implementing 'no duplicates' rule,
         //# this next insert will have no effect on the tree.
-        tree.insert(7)  ;
-        tree.insert(4);
-        tree.insert(10);
-        tree.insert(1);
-        tree.insert(6);
+        tree.Add(7);
+        tree.Add(4);
+        tree.Add(10);
+        tree.Add(1);
+        tree.Add(6);
         //for x in tree:
             //Console.WriteLine(x);  // # 1, 3, 4, 5, 6, 7, 10
         return true;
@@ -138,15 +138,13 @@ public class BST{
         root = null;
         }
  
+    // This does an in-order search
+    // 
     public void print_search(Node currently_at) {
-        Console.WriteLine(currently_at.value);
-        if (currently_at.right != null) {
-            Console.Write("RNode next: ");
+        if (currently_at != null) {
             print_search(currently_at.right);
-            }
-        if (currently_at.left != null) {
-                Console.Write("LNode next: ");
-                print_search(currently_at.left);
+            Console.Write(currently_at.value + " ");
+            print_search(currently_at.left);
             }
         }
 
@@ -195,6 +193,41 @@ public class BST{
                 }
         }
     
+
+    public bool Add(int value)
+    {
+        Node before = null, after = this.root;
+ 
+        while (after != null)
+        {
+            before = after;
+            if (value < after.value) //Is new node in left tree? 
+                  after = after.left; 
+            else if (value > after.value) //Is new node in right tree?
+                after = after.right;
+            else
+            {
+                //Exist same value
+                Console.WriteLine("Tried to insert a duplicate value: " + value);
+                return false;
+            }
+        }
+ 
+        Node newNode = new Node(value);
+ 
+        if (this.root == null)//Tree ise empty
+            this.root = newNode;
+        else
+        {
+            if (value < before.value)
+                before.left = newNode;
+            else
+                before.right = newNode;
+        }
+ 
+        return true;
+    }
+
     
 
         public void insert(int datain)
