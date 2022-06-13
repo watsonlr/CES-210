@@ -61,6 +61,7 @@ def hello():
 
 * [BYU-Idaho](https://www.byui.edu)
 * [Weather](https://www.weather.gov/)
+* [Link to this](./another_new_file.md)
 
 ![Mountains](mountains.jpg)
 
