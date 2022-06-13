@@ -63,7 +63,7 @@ def hello():
 * [Weather](https://www.weather.gov/)
 * [Link to this](./another_new_file.md)
 
-![Mountains](mountains.jpg)
+<!-- // ![Mountains](mountains.jpg) -->
 
 ## Tables
 
