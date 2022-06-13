@@ -3,19 +3,24 @@
 ## Lists
 
 Bulleted List
+
 * One
 * Two
 * Three
 
 Numerical List
+
 1. One
 2. Two
 3. Three
+4. 
 
 ## Formatting
 
 This is *italics*.
+
 This is **bold**.
+
 This is ***both***.
 
 ## Code
